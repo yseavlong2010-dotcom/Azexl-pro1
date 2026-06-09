@@ -4,164 +4,362 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Happy Birthday My Love</title>
+  <title>Happy Birthday Embee 💙</title>
 
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <audio id="bgMusic" src="https://files.catbox.moe/ecgr7x.m4a" loop preload="auto"></audio>
+  <audio
+    id="bgMusic"
+    src="https://files.catbox.moe/ecgr7x.m4a"
+    loop
+    preload="auto"
+  ></audio>
 
-  <div class="noise"></div>
-  <canvas id="starsCanvas"></canvas>
+  <canvas id="skyCanvas"></canvas>
+  <div class="soft-noise"></div>
 
+  <!-- MÀN MỞ QUÀ -->
   <section class="intro" id="intro">
-    <div class="intro-content">
-      <p class="intro-label">A little surprise for you</p>
-
-      <div class="gift">
-        <div class="gift-lid"></div>
-        <div class="gift-box"></div>
-        <div class="gift-ribbon"></div>
+    <div class="intro-card">
+      <div class="mini-badges">
+        <span>☁️</span>
+        <span>💙</span>
+        <span>🍵</span>
       </div>
 
-      <h1>Có một món quà nhỏ dành cho em...</h1>
+      <div class="gift-scene">
+        <div class="gift-glow"></div>
+
+        <div class="gift">
+          <div class="gift-lid"></div>
+          <div class="gift-body"></div>
+          <div class="gift-ribbon"></div>
+          <div class="gift-tag">for Embee</div>
+        </div>
+      </div>
+
+      <p class="overline">A tiny sky made only for you</p>
+
+      <h1>Embee ơi, có một món quà nhỏ dành cho em...</h1>
+
       <p class="intro-desc">
-        Hãy bật âm lượng lên một chút rồi chạm vào món quà này nha 💗
+        Bật âm lượng lên một chút nha. Anh đã giấu trong đây vài lời thương,
+        vài điều dịu dàng, và cả một bầu trời xanh nhỏ dành riêng cho Embee của anh.
       </p>
 
       <button id="openBtn" class="main-btn">
-        Mở món quà 🎁
+        Mở món quà của Embee 🎁
       </button>
     </div>
   </section>
 
+  <!-- TRANG CHÍNH -->
   <main class="page hidden" id="page">
+    <!-- HERO -->
     <section class="hero section">
-      <div class="hero-text">
-        <p class="eyebrow">For my little star ✨</p>
+      <div class="hero-copy reveal">
+        <p class="overline">Happy Birthday, my Embee</p>
+
         <h1>
-          Happy Birthday, <br />
-          my love 💗
+          Sinh nhật vui vẻ, <br />
+          Embee của anh 💙
         </h1>
+
         <p class="hero-desc">
-          Hôm nay là một ngày thật đặc biệt, vì thế giới đã có thêm một người
-          mà anh thương rất nhiều.
+          Hôm nay không chỉ là sinh nhật của Embee. Với anh, đây là ngày thế giới
+          có thêm một cô gái rất đáng yêu, rất mềm mại, hơi nhõng nhẽo một chút,
+          nhưng lại khiến anh muốn yêu thương và che chở nhiều hơn mỗi ngày.
+        </p>
+
+        <div class="hero-pills">
+          <span>☁️ xanh da trời</span>
+          <span>🍵 matcha latte</span>
+          <span>🍫 chocolate</span>
+          <span>🐶 cún con</span>
+          <span>🐱 mèo nhỏ</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="orbit orbit-one">🍵</div>
+        <div class="orbit orbit-two">🍫</div>
+        <div class="orbit orbit-three">🐾</div>
+
+        <div class="photo-frame">
+          <img
+            src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
+            alt="Ảnh của Embee"
+          />
+        </div>
+
+        <div class="floating-note">
+          <span>note</span>
+          Embee là điều dễ thương nhất trong ngày hôm nay, và cả trong lòng anh nữa.
+        </div>
+      </div>
+    </section>
+
+    <!-- LÁ THƯ -->
+    <section class="section love-letter reveal">
+      <div class="section-heading">
+        <p class="overline">A letter from my heart</p>
+        <h2>Gửi Embee, người anh thương nhất hôm nay</h2>
+      </div>
+
+      <div class="letter-paper">
+        <p>
+          Anh biết mình không phải lúc nào cũng nói được những lời thật hay,
+          nhưng anh luôn muốn Embee cảm nhận được rằng: em quan trọng với anh nhiều lắm.
+          Không phải chỉ trong những ngày đặc biệt, mà cả trong những ngày bình thường nhất.
+        </p>
+
+        <p>
+          Anh thương cách em nhõng nhẽo, thương những lúc em đáng yêu như một bé mèo nhỏ,
+          thương cả những điều rất riêng của em: một ly matcha latte, chút chocolate,
+          vài câu chuyện em thích nghe, những món ăn em mê, và cả những điều nhỏ xíu
+          cũng có thể khiến em vui cả ngày.
+        </p>
+
+        <p>
+          Sinh nhật năm nay, anh không chỉ chúc em vui. Anh mong em luôn được đối xử
+          thật dịu dàng, được lắng nghe, được ôm ấp, được yêu thương đúng cách,
+          và mỗi khi mệt mỏi, em vẫn nhớ rằng có một người luôn muốn đứng về phía em.
+        </p>
+
+        <p class="letter-sign">
+          Happy Birthday, Embee của anh.  
+          Anh thương Embee nhiều hơn những gì anh nói được. 💙
+        </p>
+      </div>
+    </section>
+
+    <!-- GÓC SỞ THÍCH -->
+    <section class="section cafe-section reveal">
+      <div class="section-heading">
+        <p class="overline">A birthday café for Embee</p>
+        <h2>Góc nhỏ toàn những thứ Embee thích</h2>
+      </div>
+
+      <div class="cafe-grid">
+        <article class="cafe-card big">
+          <div class="icon">🍵</div>
+          <h3>Matcha latte</h3>
+          <p>
+            Một chút xanh nhẹ, một chút ngọt, một chút ấm — giống như cách Embee
+            làm cuộc sống của anh dịu hơn rất nhiều.
+          </p>
+        </article>
+
+        <article class="cafe-card">
+          <div class="icon">🍫</div>
+          <h3>Chocolate</h3>
+          <p>
+            Ngọt vừa đủ, đáng nhớ thật lâu, giống như những khoảnh khắc anh có Embee.
+          </p>
+        </article>
+
+        <article class="cafe-card">
+          <div class="icon">🍜</div>
+          <h3>Mì ngon</h3>
+          <p>
+            Mong tuổi mới của em có thật nhiều bữa ăn ngon, thật nhiều ngày vui,
+            và thật nhiều lần được dỗ dành.
+          </p>
+        </article>
+
+        <article class="cafe-card">
+          <div class="icon">🧁</div>
+          <h3>Bánh bông lan trứng muối</h3>
+          <p>
+            Vì Embee xứng đáng với những điều vừa mềm, vừa ngon,
+            vừa được chuẩn bị bằng yêu thương.
+          </p>
+        </article>
+
+        <article class="cafe-card">
+          <div class="icon">🐶🐱</div>
+          <h3>Cún con và mèo nhỏ</h3>
+          <p>
+            Dễ thương, ngoan xinh, hơi nhõng nhẽo một chút —
+            giống Embee của anh quá trời.
+          </p>
+        </article>
+
+        <article class="cafe-card">
+          <div class="icon">🩴</div>
+          <h3>Crocs cute</h3>
+          <p>
+            Mong em luôn bước qua tuổi mới bằng sự thoải mái,
+            tự tin và đáng yêu nhất.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section gallery-section reveal">
+      <div class="section-heading">
+        <p class="overline">Beautiful little moments</p>
+        <h2>Một vài khoảnh khắc anh muốn giữ lại</h2>
+      </div>
+
+      <div class="gallery">
+        <div class="gallery-card tall">
+          <img
+            src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
+            alt="Khoảnh khắc của Embee 1"
+          />
+          <div class="caption">
+            Nụ cười của Embee làm mọi thứ dịu lại.
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=14sE0nsL4jr8aQnS0zBjXjAeBw5ZrefQq&sz=w1600"
+            alt="Khoảnh khắc của Embee 2"
+          />
+          <div class="caption">
+            Có em, ngày thường cũng thành ngày đẹp.
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=11RDTw5LkkDqvTyhqvtNL3odlMG3vPEPv&sz=w1600"
+            alt="Khoảnh khắc của Embee 3"
+          />
+          <div class="caption">
+            Một người nhỏ xinh nhưng chiếm rất nhiều trong tim anh.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LỜI HỨA -->
+    <section class="section promise-section reveal">
+      <div class="section-heading">
+        <p class="overline">Tiny promises</p>
+        <h2>Ba điều anh muốn hứa với Embee</h2>
+      </div>
+
+      <div class="promise-list">
+        <div class="promise">
+          <span>01</span>
+          <div>
+            <h3>Anh sẽ lắng nghe em nhiều hơn</h3>
+            <p>
+              Không chỉ nghe khi em vui, mà cả khi em buồn, khi em tủi thân,
+              khi em chỉ muốn được dỗ dành một chút.
+            </p>
+          </div>
+        </div>
+
+        <div class="promise">
+          <span>02</span>
+          <div>
+            <h3>Anh sẽ thương cả những lúc Embee nhõng nhẽo</h3>
+            <p>
+              Vì với anh, đó cũng là một phần rất đáng yêu của Embee —
+              một phần khiến anh chỉ muốn dịu dàng, kiên nhẫn và dỗ dành em nhiều hơn.
+            </p>
+          </div>
+        </div>
+
+        <div class="promise">
+          <span>03</span>
+          <div>
+            <h3>Anh sẽ cố gắng để em thấy an toàn</h3>
+            <p>
+              Anh muốn Embee biết rằng em không cần lúc nào cũng phải mạnh mẽ một mình.
+              Khi cần, em có thể dựa vào anh.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRÁI TIM -->
+    <section class="section heart-section reveal">
+      <div class="section-heading center">
+        <p class="overline">Tap the blue hearts</p>
+        <h2>Bấm từng trái tim nha 💌</h2>
+        <p>
+          Mỗi trái tim là một lời nhắn nhỏ anh để dành riêng cho Embee.
         </p>
       </div>
 
-      <div class="hero-photo-wrap">
-        <div class="glow"></div>
-        <img
-          class="hero-photo"
-          src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
-          alt="Ảnh của em"
-        />
-      </div>
-    </section>
-
-    <section class="section message-card reveal">
-      <p class="quote-mark">“</p>
-      <h2>Gửi em,</h2>
-      <p>
-        Anh không biết phải nói thế nào cho thật đủ, nhưng anh mong hôm nay của em
-        sẽ dịu dàng, vui vẻ và rực rỡ như chính cách em xuất hiện trong cuộc sống của anh.
-      </p>
-      <p>
-        Cảm ơn em vì đã là một điều thật ngọt ngào. Cảm ơn vì nụ cười, vì sự đáng yêu,
-        và vì những khoảnh khắc khiến anh muốn giữ mãi trong lòng.
-      </p>
-    </section>
-
-    <section class="section timeline reveal">
-      <p class="eyebrow">Our tiny memories</p>
-      <h2>Một vài điều anh muốn nói với em</h2>
-
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <span>01</span>
-          <div>
-            <h3>Vì em là một điều đặc biệt</h3>
-            <p>
-              Không cần phải quá ồn ào, chỉ cần em xuất hiện thôi cũng đủ làm mọi thứ
-              trở nên nhẹ nhàng hơn.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <span>02</span>
-          <div>
-            <h3>Anh thích nụ cười của em</h3>
-            <p>
-              Đó là kiểu nụ cười khiến một ngày bình thường cũng có thể trở thành một ngày rất đẹp.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <span>03</span>
-          <div>
-            <h3>Sinh nhật năm nay</h3>
-            <p>
-              Anh muốn dành cho em một điều nhỏ thôi, nhưng thật riêng, thật mềm mại,
-              và chỉ thuộc về em.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section gallery-section reveal">
-      <p class="eyebrow">Beautiful moments</p>
-      <h2>Một vài khoảnh khắc của em</h2>
-
-      <div class="gallery">
-        <img
-          src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
-          alt="Khoảnh khắc 1"
-        />
-
-        <img
-          src="https://drive.google.com/thumbnail?id=14sE0nsL4jr8aQnS0zBjXjAeBw5ZrefQq&sz=w1600"
-          alt="Khoảnh khắc 2"
-        />
-
-        <img
-          src="https://drive.google.com/thumbnail?id=11RDTw5LkkDqvTyhqvtNL3odlMG3vPEPv&sz=w1600"
-          alt="Khoảnh khắc 3"
-        />
-      </div>
-    </section>
-
-    <section class="section hearts-section reveal">
-      <p class="eyebrow">Tap the hearts</p>
-      <h2>Bấm vào từng trái tim nha 💌</h2>
-
       <div class="heart-grid">
-        <button class="heart-note" data-note="Anh mong em luôn được yêu thương theo cách dịu dàng nhất.">💗</button>
-        <button class="heart-note" data-note="Anh thích cách em làm những điều nhỏ bé trở nên thật đáng nhớ.">💖</button>
-        <button class="heart-note" data-note="Sinh nhật vui vẻ nhé, công chúa của anh.">💘</button>
+        <button
+          class="heart-note"
+          data-note="Anh mong Embee luôn được yêu thương bằng sự dịu dàng, không phải bằng những lời hứa hời hợt."
+        >
+          💙
+        </button>
+
+        <button
+          class="heart-note"
+          data-note="Anh thích Embee không chỉ vì em đáng yêu, mà vì em là chính em — một người rất riêng trong lòng anh."
+        >
+          🩵
+        </button>
+
+        <button
+          class="heart-note"
+          data-note="Khi Embee mệt, anh mong em nhớ rằng em vẫn xứng đáng được ôm, được dỗ, được thương thật nhiều."
+        >
+          💎
+        </button>
+
+        <button
+          class="heart-note"
+          data-note="Tuổi mới của Embee nhất định phải có nhiều matcha latte, chocolate, món ngon, tiếng cười, bình yên và có anh nữa."
+        >
+          ☁️
+        </button>
       </div>
 
-      <p id="noteText" class="note-text">
-        Mỗi trái tim đều có một lời nhắn nhỏ dành cho em.
-      </p>
+      <div class="note-box">
+        <p id="noteText">
+          Chạm vào một trái tim để mở lời nhắn của anh.
+        </p>
+      </div>
     </section>
 
-    <section class="section final reveal">
-      <p class="eyebrow">The final wish</p>
-      <h2>Happy Birthday 💗</h2>
-      <p>
-        Chúc em tuổi mới luôn xinh đẹp, bình an, vui vẻ và được yêu thương thật nhiều.
-      </p>
-      <p class="signature">
-        From someone who loves you.
-      </p>
+    <!-- KẾT -->
+    <section class="section final-section reveal">
+      <div class="final-card">
+        <div class="final-icons">
+          <span>☁️</span>
+          <span>🍵</span>
+          <span>💙</span>
+          <span>🐾</span>
+        </div>
+
+        <p class="overline">The final wish</p>
+
+        <h2>Happy Birthday, Embee của anh</h2>
+
+        <p>
+          Chúc Embee tuổi mới luôn xinh đẹp, luôn được yêu thương,
+          luôn có người kiên nhẫn với sự nhõng nhẽo của em,
+          luôn có những ngày thật xanh, thật mềm, thật bình yên.
+        </p>
+
+        <p>
+          Anh mong mọi điều tốt đẹp sẽ tìm đến em. Còn những lúc thế giới ngoài kia hơi mệt,
+          anh mong mình có thể là một nơi thật ấm để Embee quay về.
+        </p>
+
+        <h3>Anh thương Embee nhiều lắm. 💙</h3>
+      </div>
     </section>
   </main>
 
+  <!-- LIGHTBOX ẢNH -->
   <div class="lightbox" id="lightbox">
     <img id="lightboxImg" src="" alt="Ảnh phóng to" />
   </div>
