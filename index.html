@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Happy Birthday My Love</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <audio id="bgMusic" src="assets/music/song.mp3" loop></audio>
+
+  <div class="noise"></div>
+  <canvas id="starsCanvas"></canvas>
+
+  <section class="intro" id="intro">
+    <div class="intro-content">
+      <p class="intro-label">A little surprise for you</p>
+
+      <div class="gift">
+        <div class="gift-lid"></div>
+        <div class="gift-box"></div>
+        <div class="gift-ribbon"></div>
+      </div>
+
+      <h1>Có một món quà nhỏ dành cho em...</h1>
+      <p class="intro-desc">
+        Hãy bật âm lượng lên một chút rồi chạm vào món quà này nha 💗
+      </p>
+
+      <button id="openBtn" class="main-btn">
+        Mở món quà 🎁
+      </button>
+    </div>
+  </section>
+
+  <main class="page hidden" id="page">
+    <section class="hero section">
+      <div class="hero-text">
+        <p class="eyebrow">For my little star ✨</p>
+        <h1>
+          Happy Birthday, <br />
+          my love 💗
+        </h1>
+        <p class="hero-desc">
+          Hôm nay là một ngày thật đặc biệt, vì thế giới đã có thêm một người
+          mà anh thương rất nhiều.
+        </p>
+      </div>
+
+      <div class="hero-photo-wrap">
+        <div class="glow"></div>
+        <img
+          class="hero-photo"
+          src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
+          alt="Ảnh của em"
+        />
+      </div>
+    </section>
+
+    <section class="section message-card reveal">
+      <p class="quote-mark">“</p>
+      <h2>Gửi em,</h2>
+      <p>
+        Anh không biết phải nói thế nào cho thật đủ, nhưng anh mong hôm nay của em
+        sẽ dịu dàng, vui vẻ và rực rỡ như chính cách em xuất hiện trong cuộc sống của anh.
+      </p>
+      <p>
+        Cảm ơn em vì đã là một điều thật ngọt ngào. Cảm ơn vì nụ cười, vì sự đáng yêu,
+        và vì những khoảnh khắc khiến anh muốn giữ mãi trong lòng.
+      </p>
+    </section>
+
+    <section class="section timeline reveal">
+      <p class="eyebrow">Our tiny memories</p>
+      <h2>Một vài điều anh muốn nói với em</h2>
+
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <span>01</span>
+          <div>
+            <h3>Vì em là một điều đặc biệt</h3>
+            <p>
+              Không cần phải quá ồn ào, chỉ cần em xuất hiện thôi cũng đủ làm mọi thứ
+              trở nên nhẹ nhàng hơn.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span>02</span>
+          <div>
+            <h3>Anh thích nụ cười của em</h3>
+            <p>
+              Đó là kiểu nụ cười khiến một ngày bình thường cũng có thể trở thành một ngày rất đẹp.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span>03</span>
+          <div>
+            <h3>Sinh nhật năm nay</h3>
+            <p>
+              Anh muốn dành cho em một điều nhỏ thôi, nhưng thật riêng, thật mềm mại,
+              và chỉ thuộc về em.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section reveal">
+      <p class="eyebrow">Beautiful moments</p>
+      <h2>Một vài khoảnh khắc của em</h2>
+
+      <div class="gallery">
+        <img
+          src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
+          alt="Khoảnh khắc 1"
+        />
+
+        <img
+          src="https://drive.google.com/thumbnail?id=14sE0nsL4jr8aQnS0zBjXjAeBw5ZrefQq&sz=w1600"
+          alt="Khoảnh khắc 2"
+        />
+
+        <img
+          src="https://drive.google.com/thumbnail?id=11RDTw5LkkDqvTyhqvtNL3odlMG3vPEPv&sz=w1600"
+          alt="Khoảnh khắc 3"
+        />
+      </div>
+    </section>
+
+    <section class="section hearts-section reveal">
+      <p class="eyebrow">Tap the hearts</p>
+      <h2>Bấm vào từng trái tim nha 💌</h2>
+
+      <div class="heart-grid">
+        <button class="heart-note" data-note="Anh mong em luôn được yêu thương theo cách dịu dàng nhất.">💗</button>
+        <button class="heart-note" data-note="Anh thích cách em làm những điều nhỏ bé trở nên thật đáng nhớ.">💖</button>
+        <button class="heart-note" data-note="Sinh nhật vui vẻ nhé, công chúa của anh.">💘</button>
+      </div>
+
+      <p id="noteText" class="note-text">
+        Mỗi trái tim đều có một lời nhắn nhỏ dành cho em.
+      </p>
+    </section>
+
+    <section class="section final reveal">
+      <p class="eyebrow">The final wish</p>
+      <h2>Happy Birthday 💗</h2>
+      <p>
+        Chúc em tuổi mới luôn xinh đẹp, bình an, vui vẻ và được yêu thương thật nhiều.
+      </p>
+      <p class="signature">
+        From someone who loves you.
+      </p>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightboxImg" src="" alt="Ảnh phóng to" />
+  </div>
+</body>
+</html>
