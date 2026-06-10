@@ -6,8 +6,8 @@
 
   <title>Embee's Birthday World 💙</title>
 
-  <link rel="stylesheet" href="./style.css?v=5" />
-  <script src="./script.js?v=5" defer></script>
+  <link rel="stylesheet" href="./style.css?v=6" />
+  <script src="./script.js?v=6" defer></script>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
         <span>💙</span>
       </div>
 
-      <button id="giftButton" class="gift-button" type="button">
+      <button id="giftButton" class="gift-button" type="button" aria-label="Mở quà cho Embee">
         <span class="gift-lid"></span>
         <span class="gift-body"></span>
         <span class="gift-ribbon"></span>
@@ -86,6 +86,7 @@
             <span>Độ yêu thương hôm nay</span>
             <strong id="loveScore">100%</strong>
           </div>
+
           <div class="love-meter-bar">
             <span></span>
           </div>
@@ -112,7 +113,7 @@
       </div>
     </section>
 
-    <!-- AUDIO -->
+    <!-- AUDIO CORNER -->
     <section class="section audio-section reveal">
       <div class="section-heading center">
         <p class="eyebrow">Audio corner</p>
@@ -129,13 +130,15 @@
 
         <div class="audio-info">
           <p class="eyebrow">Now playing</p>
+
           <h3>Một bài nhạc dành cho Embee</h3>
+
           <p>
             Không cần quá ồn ào, chỉ cần đủ dịu để em thấy hôm nay mình được yêu thương thật nhiều.
           </p>
 
           <div class="audio-row">
-            <button id="musicButton" class="round-button" type="button">
+            <button id="musicButton" class="round-button" type="button" aria-label="Bật hoặc tắt nhạc">
               ▶
             </button>
 
@@ -154,11 +157,13 @@
       </div>
     </section>
 
-    <!-- PLAYGROUND -->
+    <!-- INTERACTIVE PLAYGROUND -->
     <section id="playground" class="section playground-section reveal">
       <div class="section-heading center">
         <p class="eyebrow">Interactive playground</p>
+
         <h2>Góc vui nhộn của Embee 🍵🍫🐾</h2>
+
         <p>
           Chạm vào từng món nha. Mỗi món Embee thích đều có hiệu ứng riêng.
         </p>
@@ -166,131 +171,155 @@
 
       <div class="toy-grid">
         <!-- MATCHA -->
-        <article id="matchaCard" class="toy-card matcha-card">
-          <div class="toy-header">
-            <span>tap to stir</span>
-            <b>🍵</b>
-          </div>
+        <article id="matchaCard" class="toy-card matcha-card" data-toy="matcha">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với matcha">
+            <span class="toy-header">
+              <span>tap to stir</span>
+              <b>🍵</b>
+            </span>
 
-          <button id="matchaButton" class="toy-button matcha-toy" type="button">
-            <span class="steam steam-one"></span>
-            <span class="steam steam-two"></span>
-            <span class="steam steam-three"></span>
+            <span class="toy-button matcha-toy">
+              <span class="steam steam-one"></span>
+              <span class="steam steam-two"></span>
+              <span class="steam steam-three"></span>
 
-            <span class="matcha-cup">
-              <span class="matcha-top"></span>
-              <span class="matcha-shine"></span>
-              <span class="matcha-swirl"></span>
-              <span class="cup-handle"></span>
+              <span class="matcha-cup">
+                <span class="matcha-top"></span>
+                <span class="matcha-shine"></span>
+                <span class="matcha-swirl"></span>
+                <span class="cup-handle"></span>
+              </span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Ly matcha latte của Embee</strong>
+              <em>
+                Bấm vào ly để matcha xoáy lên và giọt matcha rơi xuống màn hình.
+              </em>
             </span>
           </button>
-
-          <h3>Ly matcha latte của Embee</h3>
-          <p>
-            Bấm vào ly để matcha xoáy lên và giọt matcha rơi xuống màn hình.
-          </p>
         </article>
 
         <!-- CHOCOLATE -->
-        <article id="chocoCard" class="toy-card choco-card">
-          <div class="toy-header">
-            <span>tap to drop</span>
-            <b>🍫</b>
-          </div>
+        <article id="chocoCard" class="toy-card choco-card" data-toy="choco">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với chocolate">
+            <span class="toy-header">
+              <span>tap to drop</span>
+              <b>🍫</b>
+            </span>
 
-          <button id="chocoButton" class="toy-button choco-toy" type="button">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="toy-button choco-toy">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Chocolate topping</strong>
+              <em>
+                Bấm vào thanh socola để topping ngọt ngào rơi xuống cho Embee.
+              </em>
+            </span>
           </button>
-
-          <h3>Chocolate topping</h3>
-          <p>
-            Bấm vào thanh socola để topping ngọt ngào rơi xuống cho Embee.
-          </p>
         </article>
 
         <!-- PET -->
-        <article id="petCard" class="toy-card pet-card">
-          <div class="toy-header">
-            <span>tap for paws</span>
-            <b>🐶🐱</b>
-          </div>
+        <article id="petCard" class="toy-card pet-card" data-toy="pet">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với cún mèo">
+            <span class="toy-header">
+              <span>tap for paws</span>
+              <b>🐶🐱</b>
+            </span>
 
-          <button id="petButton" class="toy-button pet-toy" type="button">
-            <span class="pet-face dog-face">🐶</span>
-            <span class="pet-face cat-face">🐱</span>
-            <span class="pet-paws">🐾 🐾 🐾</span>
+            <span class="toy-button pet-toy">
+              <span class="pet-face dog-face">🐶</span>
+              <span class="pet-face cat-face">🐱</span>
+              <span class="pet-paws">🐾 🐾 🐾</span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Cún con và mèo nhỏ</strong>
+              <em>
+                Bấm vào để cún mèo chạy ngang qua màn hình chào Embee.
+              </em>
+            </span>
           </button>
-
-          <h3>Cún con và mèo nhỏ</h3>
-          <p>
-            Bấm vào để cún mèo chạy ngang qua màn hình chào Embee.
-          </p>
         </article>
 
         <!-- NOODLE -->
-        <article id="noodleCard" class="toy-card noodle-card">
-          <div class="toy-header">
-            <span>tap to slurp</span>
-            <b>🍜</b>
-          </div>
+        <article id="noodleCard" class="toy-card noodle-card" data-toy="noodle">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với tô mì">
+            <span class="toy-header">
+              <span>tap to slurp</span>
+              <b>🍜</b>
+            </span>
 
-          <button id="noodleButton" class="toy-button noodle-toy" type="button">
-            <span class="noodle-line noodle-one"></span>
-            <span class="noodle-line noodle-two"></span>
-            <span class="noodle-line noodle-three"></span>
-            <span class="bowl-body"></span>
-            <span class="chopsticks"></span>
+            <span class="toy-button noodle-toy">
+              <span class="noodle-line noodle-one"></span>
+              <span class="noodle-line noodle-two"></span>
+              <span class="noodle-line noodle-three"></span>
+              <span class="bowl-body"></span>
+              <span class="chopsticks"></span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Một tô mì cho ngày vui</strong>
+              <em>
+                Bấm vào tô mì để sợi mì nhảy lên thật vui.
+              </em>
+            </span>
           </button>
-
-          <h3>Một tô mì cho ngày vui</h3>
-          <p>
-            Bấm vào tô mì để sợi mì nhảy lên thật vui.
-          </p>
         </article>
 
         <!-- CAKE -->
-        <article id="cakeCard" class="toy-card cake-card">
-          <div class="toy-header">
-            <span>tap to glow</span>
-            <b>🧁</b>
-          </div>
-
-          <button id="cakeButton" class="toy-button cake-toy" type="button">
-            <span class="cake-candle">
-              <span class="cake-flame"></span>
+        <article id="cakeCard" class="toy-card cake-card" data-toy="cake">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với bánh sinh nhật">
+            <span class="toy-header">
+              <span>tap to glow</span>
+              <b>🧁</b>
             </span>
-            <span class="cake-cream"></span>
-            <span class="cake-body"></span>
-            <span class="salted-egg"></span>
-          </button>
 
-          <h3>Bánh bông lan trứng muối</h3>
-          <p>
-            Bấm vào bánh để nến sáng và vụn bánh rơi xuống.
-          </p>
+            <span class="toy-button cake-toy">
+              <span class="cake-candle">
+                <span class="cake-flame"></span>
+              </span>
+              <span class="cake-cream"></span>
+              <span class="cake-body"></span>
+              <span class="salted-egg"></span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Bánh bông lan trứng muối</strong>
+              <em>
+                Bấm vào bánh để nến sáng và vụn bánh rơi xuống.
+              </em>
+            </span>
+          </button>
         </article>
 
         <!-- CROCS -->
-        <article id="crocsCard" class="toy-card crocs-card">
-          <div class="toy-header">
-            <span>tap to walk</span>
-            <b>🩴</b>
-          </div>
+        <article id="crocsCard" class="toy-card crocs-card" data-toy="crocs">
+          <button class="toy-hitbox" type="button" aria-label="Tương tác với crocs">
+            <span class="toy-header">
+              <span>tap to walk</span>
+              <b>🩴</b>
+            </span>
 
-          <button id="crocsButton" class="toy-button crocs-toy" type="button">
-            <span class="croc croc-left"></span>
-            <span class="croc croc-right"></span>
+            <span class="toy-button crocs-toy">
+              <span class="croc croc-left"></span>
+              <span class="croc croc-right"></span>
+            </span>
+
+            <span class="toy-text">
+              <strong>Đôi crocs cute</strong>
+              <em>
+                Bấm vào để tạo dấu bước chân xanh qua tuổi mới của Embee.
+              </em>
+            </span>
           </button>
-
-          <h3>Đôi crocs cute</h3>
-          <p>
-            Bấm vào để tạo dấu bước chân xanh qua tuổi mới của Embee.
-          </p>
         </article>
       </div>
 
@@ -426,15 +455,16 @@
     </section>
   </main>
 
-    <div id="lightbox" class="lightbox">
+  <div id="lightbox" class="lightbox">
     <img id="lightboxImage" src="" alt="Ảnh phóng to" />
   </div>
 
+  <!-- FALLBACK: đảm bảo mở được trang dù script.js lỗi -->
   <script>
-    function openEmbeeWorldFallback() {
-      const intro = document.getElementById("intro");
-      const page = document.getElementById("page");
-      const music = document.getElementById("bgMusic");
+    window.openEmbeeFallback = function () {
+      var intro = document.getElementById("intro");
+      var page = document.getElementById("page");
+      var music = document.getElementById("bgMusic");
 
       if (page) {
         page.classList.remove("hidden");
@@ -457,18 +487,20 @@
         top: 0,
         behavior: "smooth"
       });
-    }
+    };
 
     document.addEventListener("DOMContentLoaded", function () {
-      const openButton = document.getElementById("openButton");
-      const giftButton = document.getElementById("giftButton");
+      var openButton = document.getElementById("openButton");
+      var giftButton = document.getElementById("giftButton");
 
-      if (openButton) {
-        openButton.onclick = openEmbeeWorldFallback;
+      if (openButton && !openButton.dataset.fallbackReady) {
+        openButton.dataset.fallbackReady = "true";
+        openButton.addEventListener("click", window.openEmbeeFallback);
       }
 
-      if (giftButton) {
-        giftButton.onclick = openEmbeeWorldFallback;
+      if (giftButton && !giftButton.dataset.fallbackReady) {
+        giftButton.dataset.fallbackReady = "true";
+        giftButton.addEventListener("click", window.openEmbeeFallback);
       }
     });
   </script>
