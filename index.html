@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Happy Birthday Embee 💙</title>
+  <title>Embee's Sky Café 💙</title>
 
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
@@ -19,39 +19,41 @@
   ></audio>
 
   <canvas id="skyCanvas"></canvas>
+
   <div class="soft-noise"></div>
+  <div class="effect-layer" id="effectLayer"></div>
 
   <!-- MÀN MỞ QUÀ -->
   <section class="intro" id="intro">
     <div class="intro-card">
       <div class="mini-badges">
         <span>☁️</span>
-        <span>💙</span>
         <span>🍵</span>
+        <span>💙</span>
       </div>
 
       <div class="gift-scene">
         <div class="gift-glow"></div>
 
-        <div class="gift">
-          <div class="gift-lid"></div>
-          <div class="gift-body"></div>
-          <div class="gift-ribbon"></div>
-          <div class="gift-tag">for Embee</div>
-        </div>
+        <button class="gift" id="giftBox" type="button" aria-label="Mở quà">
+          <span class="gift-lid"></span>
+          <span class="gift-body"></span>
+          <span class="gift-ribbon"></span>
+          <span class="gift-tag">for Embee</span>
+        </button>
       </div>
 
-      <p class="overline">A tiny sky made only for you</p>
+      <p class="overline">Welcome to Embee's little sky</p>
 
-      <h1>Embee ơi, có một món quà nhỏ dành cho em...</h1>
+      <h1>Embee ơi, anh có một quán nhỏ dành riêng cho em...</h1>
 
       <p class="intro-desc">
-        Bật âm lượng lên một chút nha. Anh đã giấu trong đây vài lời thương,
-        vài điều dịu dàng, và cả một bầu trời xanh nhỏ dành riêng cho Embee của anh.
+        Trong đây có matcha, chocolate, cún mèo, những món em thích,
+        và rất nhiều lời thương mà anh giấu riêng cho Embee.
       </p>
 
       <button id="openBtn" class="main-btn">
-        Mở món quà của Embee 🎁
+        Vào quán nhỏ của Embee 🎁
       </button>
     </div>
   </section>
@@ -64,22 +66,34 @@
         <p class="overline">Happy Birthday, my Embee</p>
 
         <h1>
-          Sinh nhật vui vẻ, <br />
-          Embee của anh 💙
+          Embee’s <br />
+          Sky Café 💙
         </h1>
 
         <p class="hero-desc">
-          Hôm nay không chỉ là sinh nhật của Embee. Với anh, đây là ngày thế giới
-          có thêm một cô gái rất đáng yêu, rất mềm mại, hơi nhõng nhẽo một chút,
-          nhưng lại khiến anh muốn yêu thương và che chở nhiều hơn mỗi ngày.
+          Hôm nay, anh không chỉ muốn chúc mừng sinh nhật em.
+          Anh muốn tạo ra một nơi thật mềm, thật xanh, thật đáng yêu —
+          nơi mọi thứ nhỏ bé Embee thích đều có thể chuyển động vì em.
         </p>
 
-        <div class="hero-pills">
-          <span>☁️ xanh da trời</span>
-          <span>🍵 matcha latte</span>
-          <span>🍫 chocolate</span>
-          <span>🐶 cún con</span>
-          <span>🐱 mèo nhỏ</span>
+        <div class="hero-actions">
+          <button class="soft-btn" id="scrollToCafe" type="button">
+            Chơi với góc sở thích 🍵
+          </button>
+
+          <button class="soft-btn ghost" id="quickLove" type="button">
+            Nhận một lời thương 💌
+          </button>
+        </div>
+
+        <div class="love-meter">
+          <div class="love-meter-top">
+            <span>Độ yêu thương hôm nay</span>
+            <strong id="loveScore">100%</strong>
+          </div>
+          <div class="love-bar">
+            <span id="loveBar"></span>
+          </div>
         </div>
       </div>
 
@@ -95,9 +109,51 @@
           />
         </div>
 
-        <div class="floating-note">
-          <span>note</span>
-          Embee là điều dễ thương nhất trong ngày hôm nay, và cả trong lòng anh nữa.
+        <div class="floating-note" id="heroNote">
+          <span>private note</span>
+          Embee là lý do khiến ngày hôm nay trở nên xanh và dịu hơn rất nhiều.
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIO EMBED -->
+    <section class="section audio-section reveal">
+      <div class="section-heading center">
+        <p class="overline">Embee audio corner</p>
+        <h2>Một góc âm thanh nhỏ cho Embee 🎧</h2>
+        <p>
+          Bấm phát nhạc, rồi để mọi thứ trên trang này chuyển động nhẹ nhàng theo sinh nhật của em.
+        </p>
+      </div>
+
+      <div class="audio-card">
+        <div class="audio-disc" id="audioDisc">
+          <span>💙</span>
+        </div>
+
+        <div class="audio-info">
+          <p class="audio-label">Now playing</p>
+          <h3>Một bài nhạc dành cho Embee</h3>
+          <p>
+            Không cần quá ồn ào, chỉ cần đủ dịu để em thấy hôm nay mình được yêu thương thật nhiều.
+          </p>
+
+          <div class="audio-controls">
+            <button id="musicToggle" class="round-btn" type="button">
+              ▶
+            </button>
+
+            <div class="fake-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -111,91 +167,204 @@
 
       <div class="letter-paper">
         <p>
-          Anh biết mình không phải lúc nào cũng nói được những lời thật hay,
-          nhưng anh luôn muốn Embee cảm nhận được rằng: em quan trọng với anh nhiều lắm.
-          Không phải chỉ trong những ngày đặc biệt, mà cả trong những ngày bình thường nhất.
+          Anh biết một trang web dù đẹp đến mấy cũng không thể nói hết được tất cả những điều anh muốn nói.
+          Nhưng anh vẫn muốn làm nó thật cẩn thận, vì Embee xứng đáng với những điều được chuẩn bị bằng cả sự để tâm.
         </p>
 
         <p>
-          Anh thương cách em nhõng nhẽo, thương những lúc em đáng yêu như một bé mèo nhỏ,
-          thương cả những điều rất riêng của em: một ly matcha latte, chút chocolate,
-          vài câu chuyện em thích nghe, những món ăn em mê, và cả những điều nhỏ xíu
-          cũng có thể khiến em vui cả ngày.
+          Anh thương cách em nhõng nhẽo, thương những lúc em đáng yêu như bé mèo nhỏ,
+          thương cả những sở thích rất riêng của em: matcha latte, chocolate, những câu chuyện em thích nghe,
+          cún con, mèo nhỏ, crocs cute, mì ngon và bánh bông lan trứng muối.
         </p>
 
         <p>
-          Sinh nhật năm nay, anh không chỉ chúc em vui. Anh mong em luôn được đối xử
-          thật dịu dàng, được lắng nghe, được ôm ấp, được yêu thương đúng cách,
-          và mỗi khi mệt mỏi, em vẫn nhớ rằng có một người luôn muốn đứng về phía em.
+          Sinh nhật năm nay, anh mong Embee không chỉ vui trong một ngày.
+          Anh mong em có cả một tuổi mới thật xanh, thật mềm, thật bình yên;
+          có người lắng nghe em, dỗ dành em, và thương em cả những lúc em yếu lòng nhất.
         </p>
 
         <p class="letter-sign">
           Happy Birthday, Embee của anh.  
-          Anh thương Embee nhiều hơn những gì anh nói được. 💙
+          Anh thương em nhiều hơn những gì anh nói được. 💙
         </p>
       </div>
     </section>
 
-    <!-- GÓC SỞ THÍCH -->
-    <section class="section cafe-section reveal">
-      <div class="section-heading">
-        <p class="overline">A birthday café for Embee</p>
-        <h2>Góc nhỏ toàn những thứ Embee thích</h2>
+    <!-- KHU TƯƠNG TÁC SỞ THÍCH -->
+    <section class="section playground-section reveal" id="cafePlayground">
+      <div class="section-heading center">
+        <p class="overline">Interactive birthday playground</p>
+        <h2>Góc vui nhộn của Embee 🍵🍫🐾</h2>
+        <p>
+          Chạm vào từng món nha. Mỗi món Embee thích đều có một hoạt ảnh và một lời thương riêng.
+        </p>
       </div>
 
-      <div class="cafe-grid">
-        <article class="cafe-card big">
-          <div class="icon">🍵</div>
-          <h3>Matcha latte</h3>
+      <div class="playground">
+        <!-- MATCHA -->
+        <article class="toy-card matcha-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap to stir</span>
+            <span class="toy-emoji">🍵</span>
+          </div>
+
+          <button class="matcha-cup interactive-toy" id="matchaToy" type="button">
+            <span class="steam steam-one"></span>
+            <span class="steam steam-two"></span>
+            <span class="steam steam-three"></span>
+            <span class="cup-rim">
+              <span class="matcha-surface"></span>
+              <span class="matcha-swirl"></span>
+            </span>
+            <span class="cup-body"></span>
+            <span class="cup-handle"></span>
+          </button>
+
+          <h3>Ly matcha latte của Embee</h3>
           <p>
-            Một chút xanh nhẹ, một chút ngọt, một chút ấm — giống như cách Embee
-            làm cuộc sống của anh dịu hơn rất nhiều.
+            Bấm vào ly để matcha xoáy lên, như cách Embee làm lòng anh mềm ra một chút.
           </p>
         </article>
 
-        <article class="cafe-card">
-          <div class="icon">🍫</div>
-          <h3>Chocolate</h3>
+        <!-- CHOCOLATE -->
+        <article class="toy-card choco-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap to drop</span>
+            <span class="toy-emoji">🍫</span>
+          </div>
+
+          <button class="choco-bar interactive-toy" id="chocoToy" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h3>Chocolate topping</h3>
           <p>
-            Ngọt vừa đủ, đáng nhớ thật lâu, giống như những khoảnh khắc anh có Embee.
+            Bấm vào thanh socola để topping rơi xuống màn hình, ngọt như những khoảnh khắc có em.
           </p>
         </article>
 
-        <article class="cafe-card">
-          <div class="icon">🍜</div>
-          <h3>Mì ngon</h3>
-          <p>
-            Mong tuổi mới của em có thật nhiều bữa ăn ngon, thật nhiều ngày vui,
-            và thật nhiều lần được dỗ dành.
-          </p>
-        </article>
+        <!-- PETS -->
+        <article class="toy-card pet-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap for paws</span>
+            <span class="toy-emoji">🐶🐱</span>
+          </div>
 
-        <article class="cafe-card">
-          <div class="icon">🧁</div>
-          <h3>Bánh bông lan trứng muối</h3>
-          <p>
-            Vì Embee xứng đáng với những điều vừa mềm, vừa ngon,
-            vừa được chuẩn bị bằng yêu thương.
-          </p>
-        </article>
+          <button class="pet-button interactive-toy" id="petToy" type="button">
+            <span class="pet-face dog">🐶</span>
+            <span class="pet-face cat">🐱</span>
+            <span class="paw-line">🐾 🐾 🐾</span>
+          </button>
 
-        <article class="cafe-card">
-          <div class="icon">🐶🐱</div>
           <h3>Cún con và mèo nhỏ</h3>
           <p>
-            Dễ thương, ngoan xinh, hơi nhõng nhẽo một chút —
-            giống Embee của anh quá trời.
+            Bấm vào để cún mèo chạy qua, vì độ dễ thương của Embee phải có đồng minh.
           </p>
         </article>
 
-        <article class="cafe-card">
-          <div class="icon">🩴</div>
-          <h3>Crocs cute</h3>
+        <!-- NOODLE -->
+        <article class="toy-card noodle-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap to slurp</span>
+            <span class="toy-emoji">🍜</span>
+          </div>
+
+          <button class="noodle-bowl interactive-toy" id="noodleToy" type="button">
+            <span class="bowl"></span>
+            <span class="noodle noodle-one"></span>
+            <span class="noodle noodle-two"></span>
+            <span class="noodle noodle-three"></span>
+            <span class="chopsticks"></span>
+          </button>
+
+          <h3>Một tô mì cho ngày vui</h3>
           <p>
-            Mong em luôn bước qua tuổi mới bằng sự thoải mái,
-            tự tin và đáng yêu nhất.
+            Bấm vào tô mì để sợi mì nhảy lên, mong tuổi mới của em có thật nhiều món ngon.
           </p>
         </article>
+
+        <!-- CAKE -->
+        <article class="toy-card cake-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap to glow</span>
+            <span class="toy-emoji">🧁</span>
+          </div>
+
+          <button class="cake-toy interactive-toy" id="cakeToy" type="button">
+            <span class="candle">
+              <span class="flame"></span>
+            </span>
+            <span class="cake-cream"></span>
+            <span class="cake-base"></span>
+            <span class="salted-egg"></span>
+          </button>
+
+          <h3>Bánh bông lan trứng muối</h3>
+          <p>
+            Bấm vào bánh để nến sáng lên, vì hôm nay Embee là điều đáng được ước nguyện nhất.
+          </p>
+        </article>
+
+        <!-- CROCS -->
+        <article class="toy-card crocs-card">
+          <div class="toy-top">
+            <span class="toy-tag">tap to walk</span>
+            <span class="toy-emoji">🩴</span>
+          </div>
+
+          <button class="crocs-toy interactive-toy" id="crocsToy" type="button">
+            <span class="croc croc-left"></span>
+            <span class="croc croc-right"></span>
+            <span class="croc-hole h1"></span>
+            <span class="croc-hole h2"></span>
+            <span class="croc-hole h3"></span>
+          </button>
+
+          <h3>Đôi crocs cute</h3>
+          <p>
+            Bấm vào để tạo dấu bước chân, mong Embee bước qua tuổi mới thật thoải mái và bình yên.
+          </p>
+        </article>
+      </div>
+
+      <div class="play-message" id="playMessage">
+        <p>
+          Chạm vào một món bất kỳ để mở hiệu ứng bí mật dành cho Embee.
+        </p>
+      </div>
+    </section>
+
+    <!-- LOVE CAPSULE -->
+    <section class="section capsule-section reveal">
+      <div class="section-heading center">
+        <p class="overline">Love capsule machine</p>
+        <h2>Máy gacha lời thương 💌</h2>
+        <p>
+          Mỗi lần bấm là một lời nhắn khác nhau. Không phải random đâu, cái nào cũng là anh muốn nói với Embee.
+        </p>
+      </div>
+
+      <div class="capsule-machine">
+        <div class="capsule-glass">
+          <span>💙</span>
+          <span>🍵</span>
+          <span>☁️</span>
+          <span>🐾</span>
+          <span>🍫</span>
+        </div>
+
+        <button id="capsuleBtn" class="main-btn" type="button">
+          Rút một lời thương
+        </button>
+
+        <div class="capsule-result" id="capsuleResult">
+          Embee bấm thử đi, anh có nhiều điều muốn nói lắm.
+        </div>
       </div>
     </section>
 
@@ -239,7 +408,7 @@
       </div>
     </section>
 
-    <!-- LỜI HỨA -->
+    <!-- PROMISE -->
     <section class="section promise-section reveal">
       <div class="section-heading">
         <p class="overline">Tiny promises</p>
@@ -282,54 +451,7 @@
       </div>
     </section>
 
-    <!-- TRÁI TIM -->
-    <section class="section heart-section reveal">
-      <div class="section-heading center">
-        <p class="overline">Tap the blue hearts</p>
-        <h2>Bấm từng trái tim nha 💌</h2>
-        <p>
-          Mỗi trái tim là một lời nhắn nhỏ anh để dành riêng cho Embee.
-        </p>
-      </div>
-
-      <div class="heart-grid">
-        <button
-          class="heart-note"
-          data-note="Anh mong Embee luôn được yêu thương bằng sự dịu dàng, không phải bằng những lời hứa hời hợt."
-        >
-          💙
-        </button>
-
-        <button
-          class="heart-note"
-          data-note="Anh thích Embee không chỉ vì em đáng yêu, mà vì em là chính em — một người rất riêng trong lòng anh."
-        >
-          🩵
-        </button>
-
-        <button
-          class="heart-note"
-          data-note="Khi Embee mệt, anh mong em nhớ rằng em vẫn xứng đáng được ôm, được dỗ, được thương thật nhiều."
-        >
-          💎
-        </button>
-
-        <button
-          class="heart-note"
-          data-note="Tuổi mới của Embee nhất định phải có nhiều matcha latte, chocolate, món ngon, tiếng cười, bình yên và có anh nữa."
-        >
-          ☁️
-        </button>
-      </div>
-
-      <div class="note-box">
-        <p id="noteText">
-          Chạm vào một trái tim để mở lời nhắn của anh.
-        </p>
-      </div>
-    </section>
-
-    <!-- KẾT -->
+    <!-- FINAL -->
     <section class="section final-section reveal">
       <div class="final-card">
         <div class="final-icons">
