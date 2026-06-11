@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Embee's Birthday World 💙</title>
+  <title>Embee's Birthday Quest 💙</title>
 
-  <link rel="stylesheet" href="./style.css?v=6" />
-  <script src="./script.js?v=6" defer></script>
+  <link rel="stylesheet" href="./style.css?v=7" />
+  <script src="./script.js?v=7" defer></script>
 </head>
 
 <body>
@@ -19,6 +19,7 @@
   ></audio>
 
   <div class="bg-layer"></div>
+  <div class="aurora-layer"></div>
   <div class="noise-layer"></div>
   <div id="effectLayer" class="effect-layer"></div>
 
@@ -32,48 +33,55 @@
       </div>
 
       <button id="giftButton" class="gift-button" type="button" aria-label="Mở quà cho Embee">
+        <span class="gift-glow"></span>
         <span class="gift-lid"></span>
         <span class="gift-body"></span>
         <span class="gift-ribbon"></span>
         <span class="gift-label">for Embee</span>
       </button>
 
-      <p class="eyebrow">A tiny birthday world</p>
+      <p class="eyebrow">Birthday Quest</p>
 
-      <h1>Embee ơi, anh có một thế giới nhỏ dành riêng cho em...</h1>
+      <h1>Embee ơi, anh có một nhiệm vụ nhỏ dành riêng cho em...</h1>
 
       <p class="intro-text">
-        Trong này có matcha, chocolate, cún mèo, crocs, mì ngon,
-        bánh bông lan trứng muối và rất nhiều lời thương anh giấu riêng cho Embee.
+        Embee sẽ bước vào một Sky Café nhỏ, chạm vào những món em thích,
+        mở khóa từng mảnh yêu thương và nhận món quà cuối cùng từ anh.
       </p>
 
       <button id="openButton" class="primary-button" type="button">
-        Mở thế giới của Embee 🎁
+        Bắt đầu nhiệm vụ của Embee 🎁
       </button>
     </div>
   </section>
+
+  <!-- FLOATING MUSIC -->
+  <button id="floatingMusic" class="floating-music hidden" type="button" aria-label="Bật hoặc tắt nhạc">
+    <span id="floatingMusicIcon">▶</span>
+  </button>
 
   <!-- MAIN PAGE -->
   <main id="page" class="page hidden">
     <!-- HERO -->
     <section class="section hero-section">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Happy Birthday, my Embee</p>
+        <p class="chapter-label">Chapter 01</p>
+        <p class="eyebrow">Welcome to Embee’s sky</p>
 
         <h1>
           Embee’s <br />
-          Sky Café 💙
+          Birthday Quest 💙
         </h1>
 
         <p>
           Hôm nay anh không chỉ muốn chúc mừng sinh nhật em.
-          Anh muốn tạo ra một nơi thật xanh, thật mềm, thật vui —
-          nơi những điều Embee thích đều có thể chuyển động vì em.
+          Anh muốn làm một thế giới nhỏ có nhiệm vụ, có quà, có âm thanh,
+          có những điều Embee thích và có thật nhiều lời thương dành riêng cho em.
         </p>
 
         <div class="hero-actions">
           <button id="goToPlayground" class="soft-button" type="button">
-            Chơi với góc sở thích 🍵
+            Bắt đầu mở khóa 🍵
           </button>
 
           <button id="quickLoveButton" class="soft-button ghost" type="button">
@@ -113,9 +121,85 @@
       </div>
     </section>
 
+    <!-- PASSPORT -->
+    <section class="section passport-section reveal">
+      <div class="section-heading center">
+        <p class="chapter-label">Chapter 02</p>
+        <p class="eyebrow">Embee Passport</p>
+        <h2>Hộ chiếu mở khóa yêu thương 🪪</h2>
+        <p>
+          Chạm vào 6 món trong Sky Café để mở đủ 6 dấu mộc.
+          Khi đủ rồi, món quà cuối cùng sẽ hiện ra.
+        </p>
+      </div>
+
+      <div class="passport-card">
+        <div class="passport-top">
+          <div>
+            <p class="eyebrow">Passenger</p>
+            <h3>Embee</h3>
+          </div>
+
+          <div class="passport-avatar">
+            💙
+          </div>
+        </div>
+
+        <div class="passport-progress">
+          <div>
+            <span>Tiến độ nhiệm vụ</span>
+            <strong><span id="unlockCount">0</span>/6</strong>
+          </div>
+
+          <div class="quest-bar">
+            <span id="questBar"></span>
+          </div>
+        </div>
+
+        <div class="stamp-grid">
+          <div class="stamp locked" id="stamp-matcha">
+            <span>🍵</span>
+            <strong>Matcha</strong>
+            <em>locked</em>
+          </div>
+
+          <div class="stamp locked" id="stamp-choco">
+            <span>🍫</span>
+            <strong>Chocolate</strong>
+            <em>locked</em>
+          </div>
+
+          <div class="stamp locked" id="stamp-pet">
+            <span>🐾</span>
+            <strong>Pets</strong>
+            <em>locked</em>
+          </div>
+
+          <div class="stamp locked" id="stamp-noodle">
+            <span>🍜</span>
+            <strong>Noodles</strong>
+            <em>locked</em>
+          </div>
+
+          <div class="stamp locked" id="stamp-cake">
+            <span>🧁</span>
+            <strong>Cake</strong>
+            <em>locked</em>
+          </div>
+
+          <div class="stamp locked" id="stamp-crocs">
+            <span>🩴</span>
+            <strong>Crocs</strong>
+            <em>locked</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- AUDIO CORNER -->
     <section class="section audio-section reveal">
       <div class="section-heading center">
+        <p class="chapter-label">Chapter 03</p>
         <p class="eyebrow">Audio corner</p>
         <h2>Một góc âm thanh nhỏ cho Embee 🎧</h2>
         <p>
@@ -160,12 +244,13 @@
     <!-- INTERACTIVE PLAYGROUND -->
     <section id="playground" class="section playground-section reveal">
       <div class="section-heading center">
+        <p class="chapter-label">Chapter 04</p>
         <p class="eyebrow">Interactive playground</p>
 
-        <h2>Góc vui nhộn của Embee 🍵🍫🐾</h2>
+        <h2>Sky Café của Embee 🍵🍫🐾</h2>
 
         <p>
-          Chạm vào từng món nha. Mỗi món Embee thích đều có hiệu ứng riêng.
+          Chạm vào từng món nha. Mỗi món sẽ mở một dấu mộc trong passport.
         </p>
       </div>
 
@@ -194,7 +279,7 @@
             <span class="toy-text">
               <strong>Ly matcha latte của Embee</strong>
               <em>
-                Bấm vào ly để matcha xoáy lên và giọt matcha rơi xuống màn hình.
+                Mở khóa: một tuổi mới dịu, xanh và bình yên hơn.
               </em>
             </span>
           </button>
@@ -220,7 +305,7 @@
             <span class="toy-text">
               <strong>Chocolate topping</strong>
               <em>
-                Bấm vào thanh socola để topping ngọt ngào rơi xuống cho Embee.
+                Mở khóa: thật nhiều điều ngọt ngào tìm đến Embee.
               </em>
             </span>
           </button>
@@ -243,7 +328,7 @@
             <span class="toy-text">
               <strong>Cún con và mèo nhỏ</strong>
               <em>
-                Bấm vào để cún mèo chạy ngang qua màn hình chào Embee.
+                Mở khóa: độ đáng yêu của Embee được nhân đôi.
               </em>
             </span>
           </button>
@@ -268,7 +353,7 @@
             <span class="toy-text">
               <strong>Một tô mì cho ngày vui</strong>
               <em>
-                Bấm vào tô mì để sợi mì nhảy lên thật vui.
+                Mở khóa: những bữa ngon và ngày ấm bụng.
               </em>
             </span>
           </button>
@@ -294,7 +379,7 @@
             <span class="toy-text">
               <strong>Bánh bông lan trứng muối</strong>
               <em>
-                Bấm vào bánh để nến sáng và vụn bánh rơi xuống.
+                Mở khóa: một điều ước sinh nhật thật đẹp.
               </em>
             </span>
           </button>
@@ -316,7 +401,7 @@
             <span class="toy-text">
               <strong>Đôi crocs cute</strong>
               <em>
-                Bấm vào để tạo dấu bước chân xanh qua tuổi mới của Embee.
+                Mở khóa: bước qua tuổi mới thật nhẹ nhàng.
               </em>
             </span>
           </button>
@@ -328,9 +413,33 @@
       </div>
     </section>
 
+    <!-- FINAL GIFT LOCK -->
+    <section class="section final-gift-section reveal">
+      <div id="finalGiftCard" class="final-gift-card locked">
+        <div class="final-lock">
+          <span id="finalLockIcon">🔒</span>
+        </div>
+
+        <p class="chapter-label">Chapter 05</p>
+        <p class="eyebrow">Final Gift</p>
+
+        <h2 id="finalGiftTitle">Món quà cuối đang được khóa</h2>
+
+        <p id="finalGiftText">
+          Embee hãy mở đủ 6 dấu mộc trong passport. Khi đủ rồi,
+          món quà cuối cùng anh giấu ở đây sẽ tự mở ra.
+        </p>
+
+        <button id="finalGiftButton" class="primary-button" type="button" disabled>
+          Cần mở đủ 6/6 dấu mộc
+        </button>
+      </div>
+    </section>
+
     <!-- LETTER -->
     <section class="section letter-section reveal">
       <div class="section-heading">
+        <p class="chapter-label">Chapter 06</p>
         <p class="eyebrow">A letter from my heart</p>
         <h2>Gửi Embee, người anh thương nhất hôm nay</h2>
       </div>
@@ -362,6 +471,7 @@
     <!-- GACHA -->
     <section class="section gacha-section reveal">
       <div class="section-heading center">
+        <p class="chapter-label">Chapter 07</p>
         <p class="eyebrow">Love gacha</p>
         <h2>Máy gacha lời thương 💌</h2>
         <p>
@@ -388,44 +498,45 @@
       </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- POLAROID MEMORY WALL -->
     <section class="section gallery-section reveal">
       <div class="section-heading">
-        <p class="eyebrow">Beautiful moments</p>
+        <p class="chapter-label">Chapter 08</p>
+        <p class="eyebrow">Polaroid memory wall</p>
         <h2>Một vài khoảnh khắc anh muốn giữ lại</h2>
       </div>
 
       <div class="gallery">
-        <button class="gallery-card tall" type="button">
+        <button class="gallery-card polaroid tall" type="button" data-caption="Nụ cười của Embee làm mọi thứ dịu lại.">
           <img
             class="gallery-img"
             src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
             alt="Khoảnh khắc của Embee 1"
           />
-          <span>Nụ cười của Embee làm mọi thứ dịu lại.</span>
+          <span>my favorite smile</span>
         </button>
 
-        <button class="gallery-card" type="button">
+        <button class="gallery-card polaroid" type="button" data-caption="Có em, ngày thường cũng thành ngày đẹp.">
           <img
             class="gallery-img"
             src="https://drive.google.com/thumbnail?id=14sE0nsL4jr8aQnS0zBjXjAeBw5ZrefQq&sz=w1600"
             alt="Khoảnh khắc của Embee 2"
           />
-          <span>Có em, ngày thường cũng thành ngày đẹp.</span>
+          <span>soft moment</span>
         </button>
 
-        <button class="gallery-card" type="button">
+        <button class="gallery-card polaroid" type="button" data-caption="Một người nhỏ xinh nhưng chiếm rất nhiều trong tim anh.">
           <img
             class="gallery-img"
             src="https://drive.google.com/thumbnail?id=11RDTw5LkkDqvTyhqvtNL3odlMG3vPEPv&sz=w1600"
             alt="Khoảnh khắc của Embee 3"
           />
-          <span>Một người nhỏ xinh nhưng chiếm rất nhiều trong tim anh.</span>
+          <span>Embee core</span>
         </button>
       </div>
     </section>
 
-    <!-- FINAL -->
+    <!-- FINAL WISH -->
     <section class="section final-section reveal">
       <div class="final-card">
         <div class="intro-icons">
@@ -435,6 +546,7 @@
           <span>🐾</span>
         </div>
 
+        <p class="chapter-label">Final Chapter</p>
         <p class="eyebrow">The final wish</p>
 
         <h2>Happy Birthday, Embee của anh</h2>
@@ -455,8 +567,46 @@
     </section>
   </main>
 
+  <!-- FINAL MODAL -->
+  <div id="finalModal" class="final-modal">
+    <div class="final-modal-card">
+      <button id="closeFinalModal" class="modal-close" type="button" aria-label="Đóng món quà cuối">
+        ×
+      </button>
+
+      <div class="modal-photo">
+        <img
+          class="gallery-img"
+          src="https://drive.google.com/thumbnail?id=14sFwdfePa1ZH7czWjrsATABnU6y4kCVH&sz=w1600"
+          alt="Ảnh Embee trong món quà cuối"
+        />
+      </div>
+
+      <p class="eyebrow">Unlocked final gift</p>
+
+      <h2>Món quà cuối dành cho Embee 💙</h2>
+
+      <p>
+        Không phải vì hôm nay là sinh nhật em nên anh mới thương em nhiều.
+        Mà vì anh thương em nhiều, nên hôm nay anh muốn làm mọi thứ trở nên đặc biệt hơn cho Embee.
+      </p>
+
+      <p>
+        Chúc Embee tuổi mới luôn được yêu theo cách dịu dàng nhất,
+        được dỗ dành khi em nhõng nhẽo, được lắng nghe khi em buồn,
+        và được hạnh phúc theo cách em xứng đáng.
+      </p>
+
+      <strong>Anh thương Embee nhiều lắm. Happy Birthday, my Embee. 🩵</strong>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX -->
   <div id="lightbox" class="lightbox">
-    <img id="lightboxImage" src="" alt="Ảnh phóng to" />
+    <div class="lightbox-card">
+      <img id="lightboxImage" src="" alt="Ảnh phóng to" />
+      <p id="lightboxCaption"></p>
+    </div>
   </div>
 
   <!-- FALLBACK: đảm bảo mở được trang dù script.js lỗi -->
@@ -465,9 +615,14 @@
       var intro = document.getElementById("intro");
       var page = document.getElementById("page");
       var music = document.getElementById("bgMusic");
+      var floatingMusic = document.getElementById("floatingMusic");
 
       if (page) {
         page.classList.remove("hidden");
+      }
+
+      if (floatingMusic) {
+        floatingMusic.classList.remove("hidden");
       }
 
       if (intro) {
