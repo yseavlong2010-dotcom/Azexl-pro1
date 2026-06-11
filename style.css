@@ -11,8 +11,6 @@
   --white-blue: #f4fcff;
 
   --matcha: #b7d77a;
-  --matcha-dark: #8dae55;
-
   --cream: #fff7e8;
   --choco: #744027;
   --choco-dark: #482317;
@@ -24,9 +22,9 @@
   --text: #f7fcff;
   --muted: rgba(247, 252, 255, 0.72);
 
+  --border: rgba(255, 255, 255, 0.22);
   --glass: rgba(255, 255, 255, 0.11);
   --glass-strong: rgba(255, 255, 255, 0.17);
-  --border: rgba(255, 255, 255, 0.22);
 
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
   --soft-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
@@ -68,7 +66,10 @@ img {
   display: none !important;
 }
 
+/* BACKGROUND */
+
 .bg-layer,
+.aurora-layer,
 .noise-layer,
 .effect-layer {
   position: fixed;
@@ -86,6 +87,17 @@ img {
   background-size: auto, auto, 46px 46px, 46px 46px;
 }
 
+.aurora-layer {
+  z-index: 0;
+  opacity: 0.8;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(110, 203, 255, 0.18), transparent 28%),
+    radial-gradient(circle at 78% 30%, rgba(183, 215, 122, 0.13), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255, 214, 231, 0.11), transparent 28%);
+  filter: blur(18px);
+  animation: auroraMove 9s ease-in-out infinite alternate;
+}
+
 .noise-layer {
   z-index: 1;
   opacity: 0.07;
@@ -97,6 +109,8 @@ img {
   overflow: hidden;
 }
 
+/* GENERAL */
+
 .section {
   position: relative;
   z-index: 3;
@@ -105,12 +119,30 @@ img {
   padding: 78px 0;
 }
 
+.eyebrow,
+.chapter-label {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
 .eyebrow {
   color: var(--blue-light);
-  text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
-  font-weight: 900;
+}
+
+.chapter-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 9px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: rgba(247, 252, 255, 0.76);
+  background: rgba(255, 255, 255, 0.095);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  letter-spacing: 0.14em;
+  font-size: 0.66rem;
 }
 
 .section-heading {
@@ -122,7 +154,8 @@ img {
 }
 
 .section-heading h2,
-.final-card h2 {
+.final-card h2,
+.final-gift-card h2 {
   margin-top: 12px;
   font-size: clamp(2.1rem, 8vw, 4.7rem);
   line-height: 0.96;
@@ -205,6 +238,19 @@ img {
   filter: drop-shadow(0 22px 32px rgba(0, 0, 0, 0.3));
 }
 
+.gift-glow {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 150px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(110, 203, 255, 0.42);
+  filter: blur(28px);
+  transform: translateX(-50%);
+  animation: glowPulse 2.4s ease-in-out infinite;
+}
+
 .gift-lid,
 .gift-body,
 .gift-ribbon,
@@ -270,11 +316,13 @@ img {
 
 .primary-button,
 .soft-button,
-.round-button {
+.round-button,
+.floating-music,
+.modal-close {
   border: 0;
   outline: 0;
   cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
 }
 
 .primary-button {
@@ -285,6 +333,11 @@ img {
   font-size: 1rem;
   background: linear-gradient(135deg, var(--white-blue), var(--blue-soft) 52%, var(--matcha));
   box-shadow: 0 20px 50px rgba(110, 203, 255, 0.3);
+}
+
+.primary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .soft-button {
@@ -318,7 +371,31 @@ button:active {
   transform: scale(0.95);
 }
 
-/* PAGE + HERO */
+/* FLOATING MUSIC */
+
+.floating-music {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 65;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #08213b;
+  font-weight: 950;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.85), transparent 22%),
+    linear-gradient(135deg, var(--blue-light), var(--blue-soft), var(--matcha));
+  box-shadow: 0 20px 60px rgba(110, 203, 255, 0.28);
+}
+
+.floating-music.playing {
+  animation: musicPulse 1.8s ease-in-out infinite;
+}
+
+/* HERO */
 
 .page {
   position: relative;
@@ -377,7 +454,8 @@ button:active {
   color: var(--blue-light);
 }
 
-.love-meter-bar {
+.love-meter-bar,
+.quest-bar {
   height: 12px;
   margin-top: 12px;
   overflow: hidden;
@@ -385,14 +463,23 @@ button:active {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.love-meter-bar span {
+.love-meter-bar span,
+.quest-bar span {
   display: block;
-  width: 100%;
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--blue-soft), var(--matcha), var(--pink));
   box-shadow: 0 0 25px rgba(110, 203, 255, 0.42);
+}
+
+.love-meter-bar span {
+  width: 100%;
   animation: pulseLine 2.2s ease-in-out infinite;
+}
+
+.quest-bar span {
+  width: 0%;
+  transition: width 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .hero-photo-wrap {
@@ -476,12 +563,14 @@ button:active {
   margin-bottom: 5px;
 }
 
-/* AUDIO */
+/* GLASS CARDS */
 
 .audio-card,
 .letter-section,
 .gacha-machine,
-.final-card {
+.final-card,
+.passport-card,
+.final-gift-card {
   border: 1px solid var(--border);
   border-radius: 38px;
   background:
@@ -490,6 +579,134 @@ button:active {
   backdrop-filter: blur(24px);
   box-shadow: var(--shadow);
 }
+
+/* PASSPORT */
+
+.passport-card {
+  max-width: 890px;
+  margin: 0 auto;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.passport-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 22px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.22);
+}
+
+.passport-top h3 {
+  margin-top: 8px;
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+}
+
+.passport-avatar {
+  width: 86px;
+  height: 86px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 30px;
+  color: #08213b;
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--white-blue), var(--blue-soft), var(--matcha));
+  box-shadow: 0 20px 50px rgba(110, 203, 255, 0.22);
+}
+
+.passport-progress {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.passport-progress div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  font-weight: 900;
+}
+
+.passport-progress strong {
+  color: var(--blue-light);
+}
+
+.stamp-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.stamp {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: 0.35s ease;
+}
+
+.stamp span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stamp strong {
+  font-size: 0.95rem;
+}
+
+.stamp em {
+  color: rgba(247, 252, 255, 0.56);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+.stamp.unlocked {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(183, 215, 122, 0.22), transparent 36%),
+    rgba(255, 255, 255, 0.13);
+  border-color: rgba(217, 244, 255, 0.45);
+  box-shadow: 0 0 35px rgba(110, 203, 255, 0.16);
+}
+
+.stamp.unlocked::after {
+  content: "UNLOCKED";
+  position: absolute;
+  right: -28px;
+  top: 15px;
+  padding: 5px 30px;
+  transform: rotate(28deg);
+  color: #08213b;
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, var(--blue-light), var(--matcha));
+}
+
+.stamp.unlocked em {
+  color: var(--blue-light);
+}
+
+/* AUDIO */
 
 .audio-card {
   display: grid;
@@ -599,6 +816,12 @@ button:active {
     linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.055));
   backdrop-filter: blur(24px);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.toy-card.unlocked {
+  border-color: rgba(217, 244, 255, 0.5);
+  box-shadow: 0 22px 70px rgba(110, 203, 255, 0.16);
 }
 
 .toy-hitbox {
@@ -662,13 +885,13 @@ button:active {
   font-style: normal;
 }
 
+/* TOY DRAWINGS */
+
 .matcha-card {
   background:
     radial-gradient(circle at 80% 8%, rgba(183, 215, 122, 0.23), transparent 30%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.055));
 }
-
-/* MATCHA */
 
 .matcha-cup {
   position: absolute;
@@ -748,8 +971,6 @@ button:active {
   animation: wiggle 0.7s ease-in-out 2;
 }
 
-/* CHOCOLATE */
-
 .choco-card {
   background:
     radial-gradient(circle at 82% 8%, rgba(116, 64, 39, 0.32), transparent 28%),
@@ -777,8 +998,6 @@ button:active {
 #chocoCard.active .choco-toy {
   animation: wiggle 0.55s ease-in-out 2;
 }
-
-/* PET */
 
 .pet-face {
   position: absolute;
@@ -817,8 +1036,6 @@ button:active {
 #petCard.active .pet-face {
   animation: bounce 0.65s ease-in-out 2;
 }
-
-/* NOODLE */
 
 .bowl-body {
   position: absolute;
@@ -872,8 +1089,6 @@ button:active {
 #noodleCard.active .noodle-line {
   animation: noodleJump 0.65s ease-in-out 2;
 }
-
-/* CAKE */
 
 .cake-body {
   position: absolute;
@@ -932,8 +1147,6 @@ button:active {
   opacity: 1;
   animation: flameGlow 0.55s ease-in-out infinite alternate;
 }
-
-/* CROCS */
 
 .croc {
   position: absolute;
@@ -994,6 +1207,66 @@ button:active {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--border);
   backdrop-filter: blur(22px);
+}
+
+/* FINAL GIFT */
+
+.final-gift-card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 34px 22px;
+}
+
+.final-gift-card.locked {
+  opacity: 0.9;
+}
+
+.final-gift-card.unlocked {
+  border-color: rgba(217, 244, 255, 0.55);
+  box-shadow: var(--shadow), 0 0 80px rgba(110, 203, 255, 0.22);
+}
+
+.final-gift-card.unlocked::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(
+    transparent,
+    rgba(110, 203, 255, 0.26),
+    transparent,
+    rgba(183, 215, 122, 0.2),
+    transparent
+  );
+  animation: spin 12s linear infinite;
+}
+
+.final-gift-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.final-lock {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 28px;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border);
+}
+
+.final-gift-card p {
+  color: var(--muted);
+  max-width: 720px;
+  margin: 16px auto 0;
+  line-height: 1.8;
+}
+
+.final-gift-card .primary-button {
+  margin-top: 22px;
 }
 
 /* LETTER */
@@ -1070,7 +1343,7 @@ button:active {
   animation: shake 0.55s ease-in-out 2;
 }
 
-/* GALLERY */
+/* GALLERY / POLAROID */
 
 .gallery {
   display: grid;
@@ -1089,12 +1362,37 @@ button:active {
   cursor: pointer;
 }
 
+.gallery-card.polaroid {
+  padding: 12px 12px 58px;
+  border-radius: 30px;
+  background: rgba(244, 252, 255, 0.92);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+  transform: rotate(-1.4deg);
+  transition: transform 0.35s ease;
+}
+
+.gallery-card.polaroid:nth-child(2) {
+  transform: rotate(1.2deg);
+}
+
+.gallery-card.polaroid:nth-child(3) {
+  transform: rotate(-0.7deg);
+}
+
+.gallery-card.polaroid:active {
+  transform: rotate(0deg) scale(0.98);
+}
+
 .gallery-card img {
   width: 100%;
   height: 100%;
   min-height: 380px;
   display: block;
   object-fit: cover;
+}
+
+.gallery-card.polaroid img {
+  border-radius: 20px;
 }
 
 .gallery-card span {
@@ -1113,7 +1411,16 @@ button:active {
   text-align: left;
 }
 
-/* FINAL */
+.gallery-card.polaroid span {
+  background: transparent;
+  border: 0;
+  backdrop-filter: none;
+  color: #12314d;
+  text-align: center;
+  font-weight: 950;
+}
+
+/* FINAL WISH */
 
 .final-card {
   text-align: center;
@@ -1133,9 +1440,10 @@ button:active {
   color: var(--blue-light);
 }
 
-/* LIGHTBOX + EFFECTS */
+/* MODALS */
 
-.lightbox {
+.lightbox,
+.final-modal {
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -1146,17 +1454,104 @@ button:active {
   backdrop-filter: blur(18px);
 }
 
-.lightbox.show {
+.lightbox.show,
+.final-modal.show {
   display: grid;
 }
 
-.lightbox img {
-  max-width: 100%;
-  max-height: 84vh;
-  object-fit: contain;
-  border-radius: 30px;
+.lightbox-card,
+.final-modal-card {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: 86vh;
+  overflow: auto;
+  border-radius: 34px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at top, rgba(110, 203, 255, 0.22), transparent 35%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.06));
+  backdrop-filter: blur(24px);
   box-shadow: 0 30px 110px rgba(0, 0, 0, 0.72);
 }
+
+.lightbox-card {
+  padding: 14px;
+}
+
+.lightbox img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 24px;
+  display: block;
+}
+
+#lightboxCaption {
+  padding: 14px 6px 4px;
+  color: rgba(247, 252, 255, 0.9);
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.final-modal-card {
+  padding: 24px;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #08213b;
+  font-size: 1.55rem;
+  font-weight: 900;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.modal-photo {
+  width: min(100%, 320px);
+  margin: 0 auto 20px;
+  padding: 8px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border);
+}
+
+.modal-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.final-modal-card h2 {
+  margin-top: 12px;
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 0.96;
+  letter-spacing: -0.065em;
+}
+
+.final-modal-card p {
+  color: var(--muted);
+  line-height: 1.85;
+  margin-top: 16px;
+}
+
+.final-modal-card strong {
+  display: block;
+  color: var(--blue-light);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+/* EFFECTS */
 
 .fx {
   position: fixed;
@@ -1184,6 +1579,17 @@ button:active {
   animation: stepFade ease-out forwards;
 }
 
+.fx-ring {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  z-index: 71;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 2px solid rgba(217, 244, 255, 0.75);
+  animation: ripple 0.7s ease-out forwards;
+}
+
 .matcha-drop {
   width: 16px;
   height: 26px;
@@ -1206,96 +1612,69 @@ button:active {
 
 /* ANIMATIONS */
 
-@keyframes floatGift {
-  0%, 100% {
-    transform: translateY(0) rotate(-2deg);
+@keyframes auroraMove {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
   }
 
-  50% {
-    transform: translateY(-12px) rotate(2deg);
+  to {
+    transform: translate3d(1.5%, 1%, 0) scale(1.05);
   }
+}
+
+@keyframes floatGift {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(0.92); }
+  50% { opacity: 0.95; transform: translateX(-50%) scale(1.08); }
 }
 
 @keyframes stickerFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(-5deg);
-  }
-
-  50% {
-    transform: translateY(-13px) rotate(5deg);
-  }
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-13px) rotate(5deg); }
 }
 
 @keyframes pulseLine {
-  0%, 100% {
-    transform: scaleX(0.94);
-  }
+  0%, 100% { transform: scaleX(0.94); }
+  50% { transform: scaleX(1); }
+}
 
-  50% {
-    transform: scaleX(1);
-  }
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 20px 60px rgba(110, 203, 255, 0.28); }
+  50% { box-shadow: 0 20px 78px rgba(110, 203, 255, 0.52); }
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes wave {
-  0%, 100% {
-    height: 16px;
-  }
-
-  50% {
-    height: 44px;
-  }
+  0%, 100% { height: 16px; }
+  50% { height: 44px; }
 }
 
 @keyframes steam {
-  0%, 100% {
-    opacity: 0.35;
-    transform: translateY(0);
-  }
-
-  50% {
-    opacity: 0.85;
-    transform: translateY(-12px);
-  }
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 0.85; transform: translateY(-12px); }
 }
 
 @keyframes wiggle {
-  0%, 100% {
-    transform: rotate(0) scale(1);
-  }
-
-  30% {
-    transform: rotate(-5deg) scale(1.03);
-  }
-
-  70% {
-    transform: rotate(5deg) scale(0.98);
-  }
+  0%, 100% { transform: rotate(0) scale(1); }
+  30% { transform: rotate(-5deg) scale(1.03); }
+  70% { transform: rotate(5deg) scale(0.98); }
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-16px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
 }
 
 @keyframes noodleJump {
-  0%, 100% {
-    transform: translateY(0) scaleY(1);
-  }
-
-  50% {
-    transform: translateY(-24px) scaleY(1.15);
-  }
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-24px) scaleY(1.15); }
 }
 
 @keyframes flameGlow {
@@ -1311,110 +1690,59 @@ button:active {
 }
 
 @keyframes walkLeft {
-  0%, 100% {
-    transform: rotate(-13deg) translate(0, 0);
-  }
-
-  50% {
-    transform: rotate(-6deg) translate(14px, -8px);
-  }
+  0%, 100% { transform: rotate(-13deg) translate(0, 0); }
+  50% { transform: rotate(-6deg) translate(14px, -8px); }
 }
 
 @keyframes walkRight {
-  0%, 100% {
-    transform: rotate(13deg) translate(0, 0);
-  }
-
-  50% {
-    transform: rotate(6deg) translate(-14px, -8px);
-  }
+  0%, 100% { transform: rotate(13deg) translate(0, 0); }
+  50% { transform: rotate(6deg) translate(-14px, -8px); }
 }
 
 @keyframes capsuleFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(-5deg);
-  }
-
-  50% {
-    transform: translateY(-14px) rotate(5deg);
-  }
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-14px) rotate(5deg); }
 }
 
 @keyframes shake {
-  0%, 100% {
-    transform: rotate(0);
-  }
-
-  25% {
-    transform: rotate(-4deg);
-  }
-
-  75% {
-    transform: rotate(4deg);
-  }
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
 }
 
 @keyframes flyUp {
-  0% {
-    opacity: 0;
-    transform: translateY(0) rotate(0) scale(0.8);
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-112vh) rotate(24deg) scale(1.5);
-  }
+  0% { opacity: 0; transform: translateY(0) rotate(0) scale(0.8); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-112vh) rotate(24deg) scale(1.5); }
 }
 
 @keyframes fallDown {
-  0% {
-    opacity: 0;
-    transform: translateY(0) rotate(0) scale(0.8);
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(112vh) rotate(220deg) scale(1.15);
-  }
+  0% { opacity: 0; transform: translateY(0) rotate(0) scale(0.8); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(112vh) rotate(220deg) scale(1.15); }
 }
 
 @keyframes pawRun {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px) rotate(-12deg);
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(112vw) rotate(12deg);
-  }
+  0% { opacity: 0; transform: translateX(-30px) rotate(-12deg); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(112vw) rotate(12deg); }
 }
 
 @keyframes stepFade {
-  0% {
-    opacity: 0;
-    transform: scale(0.75);
-  }
+  0% { opacity: 0; transform: scale(0.75); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-35px) scale(1.15); }
+}
 
-  20% {
-    opacity: 1;
+@keyframes ripple {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.6);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-35px) scale(1.15);
+    transform: translate(-50%, -50%) scale(8);
   }
 }
 
@@ -1436,6 +1764,10 @@ button:active {
 
   .letter-paper {
     padding: 38px;
+  }
+
+  .stamp-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .toy-grid {
@@ -1464,7 +1796,8 @@ button:active {
     min-height: unset;
   }
 
-  .final-card {
+  .final-card,
+  .final-gift-card {
     padding: 58px;
   }
 }
@@ -1486,13 +1819,23 @@ button:active {
   }
 
   .section-heading h2,
-  .final-card h2 {
+  .final-card h2,
+  .final-gift-card h2 {
     font-size: 2.12rem;
   }
 
   .hero-note {
     right: 8px;
     width: 78%;
+  }
+
+  .passport-card,
+  .gacha-machine {
+    padding: 20px;
+  }
+
+  .stamp {
+    grid-template-columns: 40px 1fr auto;
   }
 
   .gallery-card,
@@ -1503,5 +1846,12 @@ button:active {
   .toy-card,
   .toy-hitbox {
     min-height: 360px;
+  }
+
+  .floating-music {
+    right: 14px;
+    bottom: 14px;
+    width: 54px;
+    height: 54px;
   }
 }
