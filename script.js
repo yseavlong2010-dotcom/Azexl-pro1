@@ -1,5 +1,5 @@
 (function () {
-  console.log("Embee Birthday World V6 loaded 💙");
+  console.log("Embee Birthday Cute Party V8 loaded 🎂💙");
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -17,13 +17,39 @@
 
     var siteOpened = false;
     var loveScore = 100;
+    var wishMade = false;
+
+    var unlocked = {
+      matcha: false,
+      choco: false,
+      pet: false,
+      noodle: false,
+      cake: false,
+      crocs: false
+    };
+
+    var toyMessages = {
+      matcha:
+        "🍵 Matcha đã được mở khóa. Mong tuổi mới của Embee luôn dịu, xanh, bình yên và ngọt vừa đủ như ly matcha em thích.",
+      choco:
+        "🍫 Chocolate đã được mở khóa. Mong mỗi ngày của Embee đều có một chút ngọt ngào để thấy mình được yêu thương.",
+      pet:
+        "🐶🐱 Cún mèo đã được mở khóa. Độ đáng yêu của Embee chính thức được nhân đôi rồi đó.",
+      noodle:
+        "🍜 Tô mì đã được mở khóa. Mong tuổi mới của em có thật nhiều bữa ngon, nhiều ngày vui và nhiều lần được dỗ dành.",
+      cake:
+        "🧁 Bánh sinh nhật đã được mở khóa. Hôm nay Embee là điều đáng được ước nguyện nhất.",
+      crocs:
+        "🩴 Crocs cute đã được mở khóa. Mong Embee bước qua tuổi mới thật nhẹ nhàng, tự tin và bình yên."
+    };
 
     var loveNotes = [
       "Embee là kiểu người chỉ cần xuất hiện thôi cũng khiến một ngày bình thường trở nên dịu hơn.",
       "Anh thương cả những lúc Embee nhõng nhẽo, vì đó là một phần rất đáng yêu của em.",
       "Tuổi mới của Embee phải có thật nhiều matcha, chocolate, món ngon, tiếng cười và cả anh nữa.",
       "Anh mong Embee luôn được yêu thương bằng sự kiên nhẫn, dịu dàng và thật lòng.",
-      "Embee không cần lúc nào cũng mạnh mẽ đâu, có những lúc em cứ nhỏ bé một chút, anh sẽ thương."
+      "Embee không cần lúc nào cũng mạnh mẽ đâu, có những lúc em cứ nhỏ bé một chút, anh sẽ thương.",
+      "Hôm nay Embee không cần làm gì nhiều đâu, chỉ cần vui, xinh và nhận thật nhiều yêu thương là được."
     ];
 
     var gachaNotes = [
@@ -36,6 +62,25 @@
       "Mong Embee luôn có cảm giác an toàn khi ở bên anh, vì em không cần phải mạnh mẽ một mình mãi đâu.",
       "Happy Birthday Embee. Anh thương em bằng những điều nhỏ, nhưng thật lòng.",
       "Nếu được chọn một điều đẹp nhất hôm nay, anh vẫn chọn nụ cười của Embee."
+    ];
+
+    var wishes = [
+      "🎂 Điều ước đã bay lên rồi: mong Embee tuổi mới luôn xinh, vui, bình yên và được yêu thật dịu dàng.",
+      "🩵 Nến tắt rồi nè: mong mọi điều khiến Embee buồn sẽ nhẹ đi, còn những điều làm em cười sẽ nhiều hơn.",
+      "✨ Điều ước sinh nhật: mong Embee luôn có matcha ngon, chocolate ngọt, ngày vui và người thương em thật lòng.",
+      "💙 Anh ước Embee sẽ luôn được dỗ dành đúng lúc, được ôm bằng sự dịu dàng và được yêu theo cách em xứng đáng.",
+      "🎁 Điều ước nhỏ: mong tuổi mới của Embee có thật nhiều may mắn, nhiều tiếng cười và nhiều khoảnh khắc đáng nhớ."
+    ];
+
+    var compliments = [
+      "Embee đáng yêu kiểu rất riêng, không cần cố cũng làm người ta muốn thương.",
+      "Embee có vibe xanh xanh mềm mềm, nhìn thôi cũng thấy dịu lại.",
+      "Embee nhõng nhẽo một chút cũng đáng yêu, vì đó là Embee mà anh thương.",
+      "Nụ cười của Embee đúng kiểu làm birthday party sáng lên luôn á.",
+      "Embee xứng đáng được yêu bằng sự kiên nhẫn, tử tế và thật lòng.",
+      "Embee là kiểu người nhỏ xinh nhưng chiếm rất nhiều trong tim anh.",
+      "Hôm nay Embee là nhân vật chính, nên phải được khen thật nhiều.",
+      "Embee cute đến mức cái web này cũng phải bắn pháo giấy để chúc mừng."
     ];
 
     function $(selector) {
@@ -55,11 +100,21 @@
       return array[Math.floor(Math.random() * array.length)];
     }
 
+    /* OPEN SITE */
+
     function openSite() {
+      if (siteOpened) return;
+
       siteOpened = true;
 
       if (page) {
         page.classList.remove("hidden");
+      }
+
+      var floatingMusic = document.getElementById("floatingMusic");
+
+      if (floatingMusic) {
+        floatingMusic.classList.remove("hidden");
       }
 
       if (intro) {
@@ -77,13 +132,17 @@
 
       playMusic();
       showRevealItems();
-      burstCute(28);
+      burstCute(34);
+      spawnConfetti(45);
+      createRipple(window.innerWidth / 2, window.innerHeight / 2);
     }
 
     window.openEmbeeSite = openSite;
 
     on(document.getElementById("openButton"), "click", openSite);
     on(document.getElementById("giftButton"), "click", openSite);
+
+    /* MUSIC */
 
     function playMusic() {
       if (!bgMusic) return;
@@ -112,13 +171,33 @@
       setMusicUi(false);
     }
 
+    function toggleMusic() {
+      if (!bgMusic) return;
+
+      if (bgMusic.paused) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
+    }
+
     function setMusicUi(isPlaying) {
       var musicButton = document.getElementById("musicButton");
+      var floatingMusic = document.getElementById("floatingMusic");
+      var floatingMusicIcon = document.getElementById("floatingMusicIcon");
       var audioDisc = document.getElementById("audioDisc");
       var waveBars = document.getElementById("waveBars");
 
       if (musicButton) {
         musicButton.textContent = isPlaying ? "❚❚" : "▶";
+      }
+
+      if (floatingMusicIcon) {
+        floatingMusicIcon.textContent = isPlaying ? "❚❚" : "▶";
+      }
+
+      if (floatingMusic) {
+        floatingMusic.classList.toggle("playing", isPlaying);
       }
 
       if (audioDisc) {
@@ -130,15 +209,10 @@
       }
     }
 
-    on(document.getElementById("musicButton"), "click", function () {
-      if (!bgMusic) return;
+    on(document.getElementById("musicButton"), "click", toggleMusic);
+    on(document.getElementById("floatingMusic"), "click", toggleMusic);
 
-      if (bgMusic.paused) {
-        playMusic();
-      } else {
-        pauseMusic();
-      }
-    });
+    /* REVEAL */
 
     var revealItems = $all(".reveal");
 
@@ -175,6 +249,8 @@
       });
     }
 
+    /* HERO BUTTONS */
+
     on(document.getElementById("goToPlayground"), "click", function () {
       var playground = document.getElementById("playground");
 
@@ -195,7 +271,8 @@
       }
 
       increaseLove();
-      burstCute(20);
+      burstCute(22);
+      spawnSparkles(16);
     });
 
     function increaseLove() {
@@ -207,6 +284,104 @@
         loveScoreElement.textContent = loveScore + "%";
       }
     }
+
+    /* QUEST / PASSPORT */
+
+    function getUnlockCount() {
+      var count = 0;
+
+      Object.keys(unlocked).forEach(function (key) {
+        if (unlocked[key]) count++;
+      });
+
+      return count;
+    }
+
+    function unlockToy(toyName, card) {
+      if (!unlocked.hasOwnProperty(toyName)) return;
+
+      var wasLocked = !unlocked[toyName];
+
+      unlocked[toyName] = true;
+
+      if (card) {
+        card.classList.add("unlocked");
+      }
+
+      var stamp = document.getElementById("stamp-" + toyName);
+
+      if (stamp) {
+        stamp.classList.remove("locked");
+        stamp.classList.add("unlocked");
+
+        var status = stamp.querySelector("em");
+
+        if (status) {
+          status.textContent = "unlocked";
+        }
+      }
+
+      updateQuestProgress();
+
+      if (wasLocked) {
+        spawnFalling(["🔓", "💙", "✨"], 14);
+        burstCute(10);
+      }
+    }
+
+    function updateQuestProgress() {
+      var count = getUnlockCount();
+      var unlockCount = document.getElementById("unlockCount");
+      var questBar = document.getElementById("questBar");
+
+      if (unlockCount) {
+        unlockCount.textContent = count;
+      }
+
+      if (questBar) {
+        questBar.style.width = (count / 6) * 100 + "%";
+      }
+
+      if (count >= 6) {
+        unlockFinalGift();
+      }
+    }
+
+    function unlockFinalGift() {
+      var finalGiftCard = document.getElementById("finalGiftCard");
+      var finalLockIcon = document.getElementById("finalLockIcon");
+      var finalGiftTitle = document.getElementById("finalGiftTitle");
+      var finalGiftText = document.getElementById("finalGiftText");
+      var finalGiftButton = document.getElementById("finalGiftButton");
+
+      if (finalGiftCard && !finalGiftCard.classList.contains("unlocked")) {
+        finalGiftCard.classList.remove("locked");
+        finalGiftCard.classList.add("unlocked");
+        spawnFalling(["🎁", "💙", "🩵", "✨"], 36);
+        spawnConfetti(70);
+        burstCute(24);
+      }
+
+      if (finalLockIcon) {
+        finalLockIcon.textContent = "🎁";
+      }
+
+      if (finalGiftTitle) {
+        finalGiftTitle.textContent = "Món quà cuối đã được mở khóa";
+      }
+
+      if (finalGiftText) {
+        finalGiftText.textContent =
+          "Embee đã mở đủ 6 dấu mộc yêu thương. Bây giờ món quà cuối cùng anh giấu ở đây đã sẵn sàng rồi.";
+      }
+
+      if (finalGiftButton) {
+        finalGiftButton.disabled = false;
+        finalGiftButton.textContent = "Mở món quà cuối của Embee 💙";
+      }
+    }
+
+    /* TOYS */
 
     function setPlayMessage(message) {
       var playMessage = document.getElementById("playMessage");
@@ -241,54 +416,46 @@
     }
 
     function handleToy(toyName, card) {
+      activateCard(card);
+      unlockToy(toyName, card);
+      increaseLove();
+
       if (toyName === "matcha") {
-        activateCard(card);
-        setPlayMessage("🍵 Matcha của Embee đang được khuấy lên rồi nè. Mong tuổi mới của em luôn dịu, xanh và ngọt vừa đủ như ly matcha em thích.");
-        spawnMatchaDrops(26);
+        setPlayMessage(toyMessages.matcha);
+        spawnMatchaDrops(28);
         burstCute(8);
-        increaseLove();
         return;
       }
 
       if (toyName === "choco") {
-        activateCard(card);
-        setPlayMessage("🍫 Chocolate topping rơi xuống rồi đó. Mong mỗi ngày của Embee đều có một chút ngọt ngào để thấy mình được yêu thương.");
-        spawnFalling(["🍫", "▪", "◆", "●"], 34);
-        increaseLove();
+        setPlayMessage(toyMessages.choco);
+        spawnFalling(["🍫", "▪", "◆", "●"], 36);
         return;
       }
 
       if (toyName === "pet") {
-        activateCard(card);
-        setPlayMessage("🐶🐱 Cún mèo chạy qua chào Embee nè. Dễ thương gặp dễ thương là trang web cũng chịu không nổi luôn á.");
-        spawnPaws(18);
+        setPlayMessage(toyMessages.pet);
+        spawnPaws(20);
         burstCute(8);
-        increaseLove();
         return;
       }
 
       if (toyName === "noodle") {
-        activateCard(card);
-        setPlayMessage("🍜 Tô mì nhảy lên vì sinh nhật Embee đó. Mong tuổi mới của em có thật nhiều món ngon, nhiều ngày vui, nhiều lần được dỗ dành.");
-        spawnFalling(["🍜", "🥢", "✨"], 24);
-        increaseLove();
+        setPlayMessage(toyMessages.noodle);
+        spawnFalling(["🍜", "🥢", "✨"], 26);
         return;
       }
 
       if (toyName === "cake") {
-        activateCard(card);
-        setPlayMessage("🧁 Nến sáng rồi. Hôm nay Embee là điều đáng được ước nguyện nhất, nên anh mong mọi điều tốt đẹp sẽ tìm đến em.");
-        spawnFalling(["🧁", "🍰", "✨", "💙"], 28);
+        setPlayMessage(toyMessages.cake);
+        spawnFalling(["🧁", "🍰", "✨", "💙"], 30);
         burstCute(8);
-        increaseLove();
         return;
       }
 
       if (toyName === "crocs") {
-        activateCard(card);
-        setPlayMessage("🩴 Crocs cute đã bắt đầu đi dạo. Mong Embee bước qua tuổi mới thật thoải mái, tự tin, bình yên và vẫn đáng yêu như vậy.");
-        spawnSteps(14);
-        increaseLove();
+        setPlayMessage(toyMessages.crocs);
+        spawnSteps(16);
       }
     }
 
@@ -303,6 +470,121 @@
 
       handleToy(toyName, card);
     });
+
+    /* V8 BIRTHDAY FUN LAB */
+
+    on(document.getElementById("confettiButton"), "click", function () {
+      spawnConfetti(90);
+      spawnFalling(["🎂", "🎈", "🎊", "💙", "🩵", "✨"], 34);
+      burstCute(16);
+      increaseLove();
+    });
+
+    on(document.getElementById("birthdayWishButton"), "click", function () {
+      var wishText = document.getElementById("wishText");
+      var wishFlame = document.getElementById("wishFlame");
+      var card = document.querySelector(".candle-fun-card");
+
+      wishMade = true;
+
+      if (wishFlame) {
+        wishFlame.classList.add("out");
+      }
+
+      if (card) {
+        card.classList.add("wish-made");
+      }
+
+      if (wishText) {
+        wishText.textContent = randomItem(wishes);
+      }
+
+      spawnFalling(["✨", "💙", "🩵", "🎂"], 32);
+      spawnSparkles(24);
+      increaseLove();
+
+      setTimeout(function () {
+        if (wishFlame && wishMade) {
+          wishFlame.classList.remove("out");
+        }
+      }, 2600);
+    });
+
+    on(document.getElementById("balloonButton"), "click", function () {
+      var balloons = $all(".balloon");
+
+      balloons.forEach(function (balloon, index) {
+        setTimeout(function () {
+          balloon.classList.add("pop");
+
+          spawnPopAtElement(balloon, ["🎈", "🎂", "💙", "✨", "🩵"]);
+
+          setTimeout(function () {
+            balloon.classList.remove("pop");
+          }, 700);
+        }, index * 130);
+      });
+
+      spawnConfetti(45);
+      increaseLove();
+    });
+
+    on(document.getElementById("complimentButton"), "click", function () {
+      var complimentText = document.getElementById("complimentText");
+
+      if (complimentText) {
+        complimentText.textContent = randomItem(compliments);
+
+        if (typeof complimentText.animate === "function") {
+          complimentText.animate(
+            [
+              { transform: "scale(0.96)", opacity: 0.65 },
+              { transform: "scale(1.03)", opacity: 1 },
+              { transform: "scale(1)", opacity: 1 }
+            ],
+            {
+              duration: 500,
+              easing: "cubic-bezier(.2,.8,.2,1)"
+            }
+          );
+        }
+      }
+
+      spawnFalling(["💌", "💙", "🩵", "✨"], 22);
+      increaseLove();
+    });
+
+    /* FINAL GIFT MODAL */
+
+    on(document.getElementById("finalGiftButton"), "click", function () {
+      if (getUnlockCount() < 6) return;
+
+      var finalModal = document.getElementById("finalModal");
+
+      if (finalModal) {
+        finalModal.classList.add("show");
+        spawnFalling(["💙", "🩵", "✨", "🎁"], 30);
+        spawnConfetti(60);
+      }
+    });
+
+    on(document.getElementById("closeFinalModal"), "click", function () {
+      var finalModal = document.getElementById("finalModal");
+
+      if (finalModal) {
+        finalModal.classList.remove("show");
+      }
+    });
+
+    on(document.getElementById("finalModal"), "click", function (event) {
+      var finalModal = document.getElementById("finalModal");
+
+      if (event.target === finalModal) {
+        finalModal.classList.remove("show");
+      }
+    });
+
+    /* GACHA */
 
     on(document.getElementById("gachaButton"), "click", function () {
       var machine = document.getElementById("gachaMachine");
@@ -327,8 +609,11 @@
 
         increaseLove();
         burstCute(18);
+        spawnSparkles(14);
       }, 650);
     });
+
+    /* GALLERY / LIGHTBOX */
 
     $all(".gallery-img").forEach(function (img) {
       img.addEventListener("error", function () {
@@ -342,26 +627,35 @@
         var image = card.querySelector("img");
         var lightbox = document.getElementById("lightbox");
         var lightboxImage = document.getElementById("lightboxImage");
+        var lightboxCaption = document.getElementById("lightboxCaption");
 
         if (!image || !lightbox || !lightboxImage) return;
 
         lightboxImage.src = image.src;
+
+        if (lightboxCaption) {
+          lightboxCaption.textContent =
+            card.getAttribute("data-caption") || "Một khoảnh khắc rất đáng yêu của Embee.";
+        }
+
         lightbox.classList.add("show");
       });
     });
 
-    on(document.getElementById("lightbox"), "click", function () {
+    on(document.getElementById("lightbox"), "click", function (event) {
       var lightbox = document.getElementById("lightbox");
       var lightboxImage = document.getElementById("lightboxImage");
 
-      if (lightbox) {
+      if (event.target === lightbox) {
         lightbox.classList.remove("show");
-      }
 
-      if (lightboxImage) {
-        lightboxImage.src = "";
+        if (lightboxImage) {
+          lightboxImage.src = "";
+        }
       }
     });
+
+    /* EFFECTS */
 
     function appendEffect(element, removeAfter) {
       if (!effectLayer) return;
@@ -379,85 +673,103 @@
       var total = amount || 18;
 
       for (var i = 0; i < total; i++) {
-        setTimeout(function () {
-          var item = document.createElement("div");
-
-          item.className = "fx fx-up";
-          item.textContent = randomItem([
-            "💙",
-            "🩵",
-            "☁️",
-            "🍵",
-            "🍫",
-            "🐾",
-            "🐶",
-            "🐱",
-            "🧁",
-            "🍜",
-            "✨"
-          ]);
-
-          item.style.left = Math.random() * 100 + "vw";
-          item.style.fontSize = 16 + Math.random() * 22 + "px";
-          item.style.animationDuration = 4.4 + Math.random() * 2.8 + "s";
-
-          appendEffect(item, 7600);
-        }, i * 45);
+        createCuteDelayed(i);
       }
+    }
+
+    function createCuteDelayed(index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-up";
+        item.textContent = randomItem([
+          "💙",
+          "🩵",
+          "☁️",
+          "🍵",
+          "🍫",
+          "🐾",
+          "🐶",
+          "🐱",
+          "🧁",
+          "🍜",
+          "🎂",
+          "🎈",
+          "✨"
+        ]);
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.fontSize = 16 + Math.random() * 22 + "px";
+        item.style.animationDuration = 4.4 + Math.random() * 2.8 + "s";
+
+        appendEffect(item, 7600);
+      }, index * 45);
     }
 
     function spawnFalling(items, amount) {
       var total = amount || 20;
 
       for (var i = 0; i < total; i++) {
-        setTimeout(function () {
-          var item = document.createElement("div");
-
-          item.className = "fx fx-down";
-          item.textContent = randomItem(items);
-
-          item.style.left = Math.random() * 100 + "vw";
-          item.style.fontSize = 14 + Math.random() * 18 + "px";
-          item.style.animationDuration = 2.4 + Math.random() * 2.2 + "s";
-
-          appendEffect(item, 5600);
-        }, i * 42);
+        createFallingDelayed(items, i);
       }
+    }
+
+    function createFallingDelayed(items, index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-down";
+        item.textContent = randomItem(items);
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.fontSize = 14 + Math.random() * 18 + "px";
+        item.style.animationDuration = 2.4 + Math.random() * 2.2 + "s";
+
+        appendEffect(item, 5600);
+      }, index * 42);
     }
 
     function spawnMatchaDrops(amount) {
       var total = amount || 18;
 
       for (var i = 0; i < total; i++) {
-        setTimeout(function () {
-          var item = document.createElement("div");
-
-          item.className = "fx fx-down matcha-drop";
-          item.style.left = Math.random() * 100 + "vw";
-          item.style.animationDuration = 2.5 + Math.random() * 2.1 + "s";
-
-          appendEffect(item, 5600);
-        }, i * 48);
+        createMatchaDelayed(i);
       }
+    }
+
+    function createMatchaDelayed(index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-down matcha-drop";
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.animationDuration = 2.5 + Math.random() * 2.1 + "s";
+
+        appendEffect(item, 5600);
+      }, index * 48);
     }
 
     function spawnPaws(amount) {
       var total = amount || 12;
 
       for (var i = 0; i < total; i++) {
-        setTimeout(function () {
-          var item = document.createElement("div");
-
-          item.className = "fx fx-paw";
-          item.textContent = randomItem(["🐾", "🐶", "🐱"]);
-
-          item.style.top = 18 + Math.random() * 68 + "vh";
-          item.style.fontSize = 18 + Math.random() * 18 + "px";
-          item.style.animationDuration = 1.8 + Math.random() * 1.1 + "s";
-
-          appendEffect(item, 3400);
-        }, i * 90);
+        createPawDelayed(i);
       }
+    }
+
+    function createPawDelayed(index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-paw";
+        item.textContent = randomItem(["🐾", "🐶", "🐱"]);
+
+        item.style.top = 18 + Math.random() * 68 + "vh";
+        item.style.fontSize = 18 + Math.random() * 18 + "px";
+        item.style.animationDuration = 1.8 + Math.random() * 1.1 + "s";
+
+        appendEffect(item, 3400);
+      }, index * 90);
     }
 
     function spawnSteps(amount) {
@@ -486,11 +798,86 @@
       }, index * 120);
     }
 
+    function spawnConfetti(amount) {
+      var total = amount || 60;
+
+      for (var i = 0; i < total; i++) {
+        createConfettiDelayed(i);
+      }
+    }
+
+    function createConfettiDelayed(index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+        var colors = ["confetti-blue", "confetti-matcha", "confetti-pink", "confetti-yellow"];
+
+        item.className = "fx fx-down confetti-piece " + randomItem(colors);
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.animationDuration = 2.3 + Math.random() * 2.2 + "s";
+        item.style.transform = "rotate(" + Math.floor(Math.random() * 180) + "deg)";
+
+        appendEffect(item, 5600);
+      }, index * 18);
+    }
+
+    function spawnSparkles(amount) {
+      var total = amount || 12;
+
+      for (var i = 0; i < total; i++) {
+        setTimeout(function () {
+          var item = document.createElement("div");
+
+          item.className = "fx fx-sparkle";
+          item.textContent = randomItem(["✨", "💙", "🩵", "☁️"]);
+
+          item.style.left = 15 + Math.random() * 70 + "vw";
+          item.style.top = 20 + Math.random() * 55 + "vh";
+          item.style.fontSize = 18 + Math.random() * 18 + "px";
+
+          appendEffect(item, 1400);
+        }, i * 45);
+      }
+    }
+
+    function spawnPopAtElement(element, items) {
+      if (!element) return;
+
+      var rect = element.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+
+      for (var i = 0; i < 12; i++) {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-pop";
+        item.textContent = randomItem(items);
+
+        item.style.left = centerX + (Math.random() * 90 - 45) + "px";
+        item.style.top = centerY + (Math.random() * 70 - 35) + "px";
+        item.style.fontSize = 16 + Math.random() * 16 + "px";
+
+        appendEffect(item, 1100);
+      }
+    }
+
+    function createRipple(x, y) {
+      var ring = document.createElement("div");
+
+      ring.className = "fx-ring";
+      ring.style.left = x + "px";
+      ring.style.top = y + "px";
+
+      appendEffect(ring, 800);
+    }
+
     document.addEventListener("click", function (event) {
       if (!siteOpened) return;
 
+      createRipple(event.clientX, event.clientY);
+
       var interactive = event.target.closest(
-        "button, .gallery-card, .toy-card, .lightbox, a"
+        "button, .gallery-card, .toy-card, .lightbox, .final-modal, a"
       );
 
       if (interactive) return;
@@ -512,7 +899,7 @@
       if (siteOpened) {
         burstCute(1);
       }
-    }, 1500);
+    }, 1600);
 
     function makeFallbackImage(label) {
       var svg =
