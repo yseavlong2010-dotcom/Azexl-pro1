@@ -1,5 +1,5 @@
 (function () {
-  console.log("Embee Birthday Cute Party V8 loaded 🎂💙");
+  console.log("Embee Birthday Arcade V9 loaded 💙");
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -11,21 +11,25 @@
 
   ready(function () {
     var intro = document.getElementById("intro");
-    var page = document.getElementById("page");
+    var app = document.getElementById("app");
+    var topbar = document.getElementById("topbar");
     var bgMusic = document.getElementById("bgMusic");
-    var effectLayer = document.getElementById("effectLayer");
+    var fxLayer = document.getElementById("fxLayer");
 
     var siteOpened = false;
     var loveScore = 100;
-    var wishMade = false;
+    var finalUnlocked = false;
+    var wheelSpinning = false;
+    var wheelRotation = 0;
 
-    var unlocked = {
+    var quests = {
       matcha: false,
       choco: false,
       pet: false,
       noodle: false,
       cake: false,
-      crocs: false
+      crocs: false,
+      party: false
     };
 
     var toyMessages = {
@@ -38,30 +42,17 @@
       noodle:
         "🍜 Tô mì đã được mở khóa. Mong tuổi mới của em có thật nhiều bữa ngon, nhiều ngày vui và nhiều lần được dỗ dành.",
       cake:
-        "🧁 Bánh sinh nhật đã được mở khóa. Hôm nay Embee là điều đáng được ước nguyện nhất.",
+        "🎂 Bánh sinh nhật đã được mở khóa. Hôm nay Embee là điều đáng được ước nguyện nhất.",
       crocs:
         "🩴 Crocs cute đã được mở khóa. Mong Embee bước qua tuổi mới thật nhẹ nhàng, tự tin và bình yên."
     };
 
-    var loveNotes = [
-      "Embee là kiểu người chỉ cần xuất hiện thôi cũng khiến một ngày bình thường trở nên dịu hơn.",
+    var quickNotes = [
+      "Embee là nhân vật chính của hôm nay, nên em chỉ cần vui, xinh và nhận thật nhiều yêu thương thôi.",
       "Anh thương cả những lúc Embee nhõng nhẽo, vì đó là một phần rất đáng yêu của em.",
       "Tuổi mới của Embee phải có thật nhiều matcha, chocolate, món ngon, tiếng cười và cả anh nữa.",
-      "Anh mong Embee luôn được yêu thương bằng sự kiên nhẫn, dịu dàng và thật lòng.",
       "Embee không cần lúc nào cũng mạnh mẽ đâu, có những lúc em cứ nhỏ bé một chút, anh sẽ thương.",
-      "Hôm nay Embee không cần làm gì nhiều đâu, chỉ cần vui, xinh và nhận thật nhiều yêu thương là được."
-    ];
-
-    var gachaNotes = [
-      "Anh mong Embee luôn được đối xử thật dịu dàng, nhất là vào những ngày em thấy mình hơi mệt.",
-      "Nếu thế giới ngoài kia làm Embee buồn, anh mong em nhớ rằng vẫn có một người rất muốn đứng về phía em.",
-      "Anh thích cách Embee là chính Embee: đáng yêu, hơi nhõng nhẽo, mềm mại và rất riêng trong lòng anh.",
-      "Chúc Embee tuổi mới có nhiều matcha latte ngon, nhiều chocolate ngọt, nhiều món ăn em thích và nhiều bình yên.",
-      "Anh không hứa sẽ hoàn hảo, nhưng anh muốn học cách yêu Embee tử tế hơn từng ngày.",
-      "Embee xứng đáng với những điều được chuẩn bị bằng sự để tâm, không phải bằng những lời nói qua loa.",
-      "Mong Embee luôn có cảm giác an toàn khi ở bên anh, vì em không cần phải mạnh mẽ một mình mãi đâu.",
-      "Happy Birthday Embee. Anh thương em bằng những điều nhỏ, nhưng thật lòng.",
-      "Nếu được chọn một điều đẹp nhất hôm nay, anh vẫn chọn nụ cười của Embee."
+      "Hôm nay web này hoạt động vì một nhiệm vụ duy nhất: làm Embee thấy mình được thương thật nhiều."
     ];
 
     var wishes = [
@@ -76,11 +67,20 @@
       "Embee đáng yêu kiểu rất riêng, không cần cố cũng làm người ta muốn thương.",
       "Embee có vibe xanh xanh mềm mềm, nhìn thôi cũng thấy dịu lại.",
       "Embee nhõng nhẽo một chút cũng đáng yêu, vì đó là Embee mà anh thương.",
-      "Nụ cười của Embee đúng kiểu làm birthday party sáng lên luôn á.",
+      "Nụ cười của Embee đúng kiểu làm birthday arcade sáng lên luôn á.",
       "Embee xứng đáng được yêu bằng sự kiên nhẫn, tử tế và thật lòng.",
       "Embee là kiểu người nhỏ xinh nhưng chiếm rất nhiều trong tim anh.",
       "Hôm nay Embee là nhân vật chính, nên phải được khen thật nhiều.",
       "Embee cute đến mức cái web này cũng phải bắn pháo giấy để chúc mừng."
+    ];
+
+    var wheelNotes = [
+      "💙 Phần thưởng: một cái ôm tinh thần thật lâu cho Embee.",
+      "🍵 Phần thưởng: một ly matcha latte trong tưởng tượng, ít đắng nhiều thương.",
+      "🎂 Phần thưởng: một điều ước sinh nhật được anh giữ thật cẩn thận.",
+      "🎈 Phần thưởng: một ngày nhẹ nhàng, không buồn, không mệt, chỉ có vui.",
+      "🐾 Phần thưởng: cún mèo chạy qua gửi 1000 điểm đáng yêu cho Embee.",
+      "🍫 Phần thưởng: một miếng chocolate ngọt như cách anh thương em."
     ];
 
     function $(selector) {
@@ -91,31 +91,20 @@
       return Array.prototype.slice.call(document.querySelectorAll(selector));
     }
 
-    function on(element, eventName, callback) {
-      if (!element) return;
-      element.addEventListener(eventName, callback);
-    }
-
     function randomItem(array) {
       return array[Math.floor(Math.random() * array.length)];
     }
 
-    /* OPEN SITE */
-
-    function openSite() {
+    function openWorld() {
       if (siteOpened) return;
 
       siteOpened = true;
 
-      if (page) {
-        page.classList.remove("hidden");
-      }
+      if (app) app.classList.remove("hidden");
+      if (topbar) topbar.classList.remove("hidden");
 
       var floatingMusic = document.getElementById("floatingMusic");
-
-      if (floatingMusic) {
-        floatingMusic.classList.remove("hidden");
-      }
+      if (floatingMusic) floatingMusic.classList.remove("hidden");
 
       if (intro) {
         intro.classList.add("hide");
@@ -132,17 +121,12 @@
 
       playMusic();
       showRevealItems();
-      burstCute(34);
-      spawnConfetti(45);
+      spawnConfetti(80);
+      burstCute(32);
       createRipple(window.innerWidth / 2, window.innerHeight / 2);
     }
 
-    window.openEmbeeSite = openSite;
-
-    on(document.getElementById("openButton"), "click", openSite);
-    on(document.getElementById("giftButton"), "click", openSite);
-
-    /* MUSIC */
+    window.openEmbeeSite = openWorld;
 
     function playMusic() {
       if (!bgMusic) return;
@@ -182,42 +166,24 @@
     }
 
     function setMusicUi(isPlaying) {
-      var musicButton = document.getElementById("musicButton");
-      var floatingMusic = document.getElementById("floatingMusic");
+      var musicButtonIcon = document.getElementById("musicButtonIcon");
       var floatingMusicIcon = document.getElementById("floatingMusicIcon");
-      var audioDisc = document.getElementById("audioDisc");
+      var floatingMusic = document.getElementById("floatingMusic");
+      var musicDisc = document.getElementById("musicDisc");
       var waveBars = document.getElementById("waveBars");
 
-      if (musicButton) {
-        musicButton.textContent = isPlaying ? "❚❚" : "▶";
-      }
+      if (musicButtonIcon) musicButtonIcon.textContent = isPlaying ? "❚❚" : "▶";
+      if (floatingMusicIcon) floatingMusicIcon.textContent = isPlaying ? "❚❚" : "▶";
 
-      if (floatingMusicIcon) {
-        floatingMusicIcon.textContent = isPlaying ? "❚❚" : "▶";
-      }
-
-      if (floatingMusic) {
-        floatingMusic.classList.toggle("playing", isPlaying);
-      }
-
-      if (audioDisc) {
-        audioDisc.classList.toggle("playing", isPlaying);
-      }
-
-      if (waveBars) {
-        waveBars.classList.toggle("playing", isPlaying);
-      }
+      if (floatingMusic) floatingMusic.classList.toggle("playing", isPlaying);
+      if (musicDisc) musicDisc.classList.toggle("playing", isPlaying);
+      if (waveBars) waveBars.classList.toggle("playing", isPlaying);
     }
-
-    on(document.getElementById("musicButton"), "click", toggleMusic);
-    on(document.getElementById("floatingMusic"), "click", toggleMusic);
-
-    /* REVEAL */
 
     var revealItems = $all(".reveal");
 
     if ("IntersectionObserver" in window) {
-      var revealObserver = new IntersectionObserver(
+      var observer = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -231,7 +197,7 @@
       );
 
       revealItems.forEach(function (item) {
-        revealObserver.observe(item);
+        observer.observe(item);
       });
     } else {
       revealItems.forEach(function (item) {
@@ -249,31 +215,28 @@
       });
     }
 
-    /* HERO BUTTONS */
+    function scrollToTarget(targetId) {
+      var target = document.getElementById(targetId);
 
-    on(document.getElementById("goToPlayground"), "click", function () {
-      var playground = document.getElementById("playground");
+      if (!target) return;
 
-      if (playground) {
-        playground.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    });
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
 
-    on(document.getElementById("quickLoveButton"), "click", function () {
+    function quickNote() {
       var heroNote = document.getElementById("heroNote");
 
       if (heroNote) {
-        heroNote.innerHTML =
-          "<span>private note</span>" + randomItem(loveNotes);
+        heroNote.innerHTML = "<span>private note</span>" + randomItem(quickNotes);
       }
 
       increaseLove();
-      burstCute(22);
-      spawnSparkles(16);
-    });
+      burstCute(18);
+      spawnSparkles(14);
+    }
 
     function increaseLove() {
       loveScore += Math.floor(Math.random() * 8) + 3;
@@ -285,124 +248,116 @@
       }
     }
 
-    /* QUEST / PASSPORT */
-
-    function getUnlockCount() {
+    function getQuestCount() {
       var count = 0;
 
-      Object.keys(unlocked).forEach(function (key) {
-        if (unlocked[key]) count++;
+      Object.keys(quests).forEach(function (key) {
+        if (quests[key]) count++;
       });
 
       return count;
     }
 
-    function unlockToy(toyName, card) {
-      if (!unlocked.hasOwnProperty(toyName)) return;
+    function completeQuest(questName, sourceElement) {
+      if (!Object.prototype.hasOwnProperty.call(quests, questName)) return;
 
-      var wasLocked = !unlocked[toyName];
+      var wasLocked = !quests[questName];
 
-      unlocked[toyName] = true;
+      quests[questName] = true;
 
-      if (card) {
-        card.classList.add("unlocked");
+      if (sourceElement) {
+        sourceElement.classList.add("unlocked");
       }
 
-      var stamp = document.getElementById("stamp-" + toyName);
+      var badge = document.getElementById("badge-" + questName);
 
-      if (stamp) {
-        stamp.classList.remove("locked");
-        stamp.classList.add("unlocked");
+      if (badge) {
+        badge.classList.remove("locked");
+        badge.classList.add("unlocked");
 
-        var status = stamp.querySelector("em");
-
+        var status = badge.querySelector("em");
         if (status) {
           status.textContent = "unlocked";
         }
       }
 
-      updateQuestProgress();
+      updateQuestUi();
 
       if (wasLocked) {
-        spawnFalling(["🔓", "💙", "✨"], 14);
+        spawnFalling(["🔓", "💙", "✨"], 16);
         burstCute(10);
       }
     }
 
-    function updateQuestProgress() {
-      var count = getUnlockCount();
-      var unlockCount = document.getElementById("unlockCount");
-      var questBar = document.getElementById("questBar");
+    function updateQuestUi() {
+      var count = getQuestCount();
+      var percent = (count / 7) * 100;
 
-      if (unlockCount) {
-        unlockCount.textContent = count;
-      }
+      var questCount = document.getElementById("questCount");
+      var questLine = document.getElementById("questLine");
+      var topQuestText = document.getElementById("topQuestText");
+      var topQuestBar = document.getElementById("topQuestBar");
 
-      if (questBar) {
-        questBar.style.width = (count / 6) * 100 + "%";
-      }
+      if (questCount) questCount.textContent = count;
+      if (questLine) questLine.style.width = percent + "%";
+      if (topQuestText) topQuestText.textContent = "Quest " + count + "/7";
+      if (topQuestBar) topQuestBar.style.width = percent + "%";
 
-      if (count >= 6) {
-        unlockFinalGift();
-      }
-    }
-
-    function unlockFinalGift() {
-      var finalGiftCard = document.getElementById("finalGiftCard");
-      var finalLockIcon = document.getElementById("finalLockIcon");
-      var finalGiftTitle = document.getElementById("finalGiftTitle");
-      var finalGiftText = document.getElementById("finalGiftText");
-      var finalGiftButton = document.getElementById("finalGiftButton");
-
-      if (finalGiftCard && !finalGiftCard.classList.contains("unlocked")) {
-        finalGiftCard.classList.remove("locked");
-        finalGiftCard.classList.add("unlocked");
-        spawnFalling(["🎁", "💙", "🩵", "✨"], 36);
-        spawnConfetti(70);
-        burstCute(24);
-      }
-
-      if (finalLockIcon) {
-        finalLockIcon.textContent = "🎁";
-      }
-
-      if (finalGiftTitle) {
-        finalGiftTitle.textContent = "Món quà cuối đã được mở khóa";
-      }
-
-      if (finalGiftText) {
-        finalGiftText.textContent =
-          "Embee đã mở đủ 6 dấu mộc yêu thương. Bây giờ món quà cuối cùng anh giấu ở đây đã sẵn sàng rồi.";
-      }
-
-      if (finalGiftButton) {
-        finalGiftButton.disabled = false;
-        finalGiftButton.textContent = "Mở món quà cuối của Embee 💙";
+      if (count >= 7) {
+        unlockFinalGate();
       }
     }
 
-    /* TOYS */
+    function unlockFinalGate() {
+      if (finalUnlocked) return;
 
-    function setPlayMessage(message) {
-      var playMessage = document.getElementById("playMessage");
+      finalUnlocked = true;
 
-      if (!playMessage) return;
+      var finalGate = document.getElementById("finalGate");
+      var gateIcon = document.getElementById("gateIcon");
+      var finalTitle = document.getElementById("finalTitle");
+      var finalText = document.getElementById("finalText");
 
-      playMessage.textContent = message;
-
-      if (typeof playMessage.animate === "function") {
-        playMessage.animate(
-          [
-            { transform: "scale(0.98)", opacity: 0.75 },
-            { transform: "scale(1.02)", opacity: 1 },
-            { transform: "scale(1)", opacity: 1 }
-          ],
-          {
-            duration: 520,
-            easing: "cubic-bezier(.2,.8,.2,1)"
-          }
-        );
+      if (finalGate) {
+        finalGate.classList.remove("locked");
+        finalGate.classList.add("unlocked");
       }
+
+      if (gateIcon) gateIcon.textContent = "🎁";
+      if (finalTitle) finalTitle.textContent = "Cổng quà cuối đã mở";
+      if (finalText) {
+        finalText.textContent =
+          "Embee đã hoàn thành đủ 7/7 nhiệm vụ. Món quà cuối cùng đã sẵn sàng rồi nè.";
+      }
+
+      spawnConfetti(110);
+      spawnFalling(["🎁", "💙", "🩵", "✨"], 45);
+      burstCute(28);
+    }
+
+    function setArcadeMessage(message) {
+      var box = document.getElementById("arcadeMessage");
+
+      if (!box) return;
+
+      box.textContent = message;
+      pulseElement(box);
+    }
+
+    function pulseElement(element) {
+      if (!element || typeof element.animate !== "function") return;
+
+      element.animate(
+        [
+          { transform: "scale(0.97)", opacity: 0.72 },
+          { transform: "scale(1.025)", opacity: 1 },
+          { transform: "scale(1)", opacity: 1 }
+        ],
+        {
+          duration: 520,
+          easing: "cubic-bezier(.2,.8,.2,1)"
+        }
+      );
     }
 
     function activateCard(card) {
@@ -415,108 +370,93 @@
       }, 1400);
     }
 
-    function handleToy(toyName, card) {
+    function handleToy(card) {
+      if (!card) return;
+
+      var toyName = card.getAttribute("data-toy");
+
       activateCard(card);
-      unlockToy(toyName, card);
+      completeQuest(toyName, card);
       increaseLove();
 
       if (toyName === "matcha") {
-        setPlayMessage(toyMessages.matcha);
-        spawnMatchaDrops(28);
+        setArcadeMessage(toyMessages.matcha);
+        spawnMatchaDrops(30);
         burstCute(8);
         return;
       }
 
       if (toyName === "choco") {
-        setPlayMessage(toyMessages.choco);
+        setArcadeMessage(toyMessages.choco);
         spawnFalling(["🍫", "▪", "◆", "●"], 36);
         return;
       }
 
       if (toyName === "pet") {
-        setPlayMessage(toyMessages.pet);
-        spawnPaws(20);
+        setArcadeMessage(toyMessages.pet);
+        spawnPaws(22);
         burstCute(8);
         return;
       }
 
       if (toyName === "noodle") {
-        setPlayMessage(toyMessages.noodle);
-        spawnFalling(["🍜", "🥢", "✨"], 26);
+        setArcadeMessage(toyMessages.noodle);
+        spawnFalling(["🍜", "🥢", "✨"], 28);
         return;
       }
 
       if (toyName === "cake") {
-        setPlayMessage(toyMessages.cake);
-        spawnFalling(["🧁", "🍰", "✨", "💙"], 30);
+        setArcadeMessage(toyMessages.cake);
+        spawnFalling(["🎂", "🍰", "✨", "💙"], 32);
         burstCute(8);
         return;
       }
 
       if (toyName === "crocs") {
-        setPlayMessage(toyMessages.crocs);
-        spawnSteps(16);
+        setArcadeMessage(toyMessages.crocs);
+        spawnSteps(18);
       }
     }
 
-    var playground = document.getElementById("playground");
-
-    on(playground, "click", function (event) {
-      var card = event.target.closest("[data-toy]");
-
-      if (!card) return;
-
-      var toyName = card.getAttribute("data-toy");
-
-      handleToy(toyName, card);
-    });
-
-    /* V8 BIRTHDAY FUN LAB */
-
-    on(document.getElementById("confettiButton"), "click", function () {
-      spawnConfetti(90);
-      spawnFalling(["🎂", "🎈", "🎊", "💙", "🩵", "✨"], 34);
+    function doConfetti(actionElement) {
+      completeQuest("party", actionElement);
+      spawnConfetti(95);
+      spawnFalling(["🎂", "🎈", "🎊", "💙", "🩵", "✨"], 38);
       burstCute(16);
       increaseLove();
-    });
+    }
 
-    on(document.getElementById("birthdayWishButton"), "click", function () {
+    function doWishCandle(actionElement) {
+      completeQuest("party", actionElement);
+
       var wishText = document.getElementById("wishText");
       var wishFlame = document.getElementById("wishFlame");
-      var card = document.querySelector(".candle-fun-card");
-
-      wishMade = true;
 
       if (wishFlame) {
         wishFlame.classList.add("out");
-      }
 
-      if (card) {
-        card.classList.add("wish-made");
+        setTimeout(function () {
+          wishFlame.classList.remove("out");
+        }, 2600);
       }
 
       if (wishText) {
         wishText.textContent = randomItem(wishes);
       }
 
-      spawnFalling(["✨", "💙", "🩵", "🎂"], 32);
-      spawnSparkles(24);
+      spawnFalling(["✨", "💙", "🩵", "🎂"], 34);
+      spawnSparkles(22);
       increaseLove();
+    }
 
-      setTimeout(function () {
-        if (wishFlame && wishMade) {
-          wishFlame.classList.remove("out");
-        }
-      }, 2600);
-    });
+    function doBalloonPop(actionElement) {
+      completeQuest("party", actionElement);
 
-    on(document.getElementById("balloonButton"), "click", function () {
       var balloons = $all(".balloon");
 
       balloons.forEach(function (balloon, index) {
         setTimeout(function () {
           balloon.classList.add("pop");
-
           spawnPopAtElement(balloon, ["🎈", "🎂", "💙", "✨", "🩵"]);
 
           setTimeout(function () {
@@ -525,142 +465,239 @@
         }, index * 130);
       });
 
-      spawnConfetti(45);
+      spawnConfetti(48);
       increaseLove();
-    });
+    }
 
-    on(document.getElementById("complimentButton"), "click", function () {
+    function doCompliment(actionElement) {
+      completeQuest("party", actionElement);
+
       var complimentText = document.getElementById("complimentText");
 
       if (complimentText) {
         complimentText.textContent = randomItem(compliments);
-
-        if (typeof complimentText.animate === "function") {
-          complimentText.animate(
-            [
-              { transform: "scale(0.96)", opacity: 0.65 },
-              { transform: "scale(1.03)", opacity: 1 },
-              { transform: "scale(1)", opacity: 1 }
-            ],
-            {
-              duration: 500,
-              easing: "cubic-bezier(.2,.8,.2,1)"
-            }
-          );
-        }
+        pulseElement(complimentText);
       }
 
-      spawnFalling(["💌", "💙", "🩵", "✨"], 22);
+      spawnFalling(["💌", "💙", "🩵", "✨"], 24);
       increaseLove();
-    });
+    }
 
-    /* FINAL GIFT MODAL */
+    function spinWheel() {
+      if (wheelSpinning) return;
 
-    on(document.getElementById("finalGiftButton"), "click", function () {
-      if (getUnlockCount() < 6) return;
+      wheelSpinning = true;
 
-      var finalModal = document.getElementById("finalModal");
+      var wheel = document.getElementById("spinWheel");
+      var result = document.getElementById("wheelResult");
 
-      if (finalModal) {
-        finalModal.classList.add("show");
-        spawnFalling(["💙", "🩵", "✨", "🎁"], 30);
-        spawnConfetti(60);
-      }
-    });
+      wheelRotation += 720 + Math.floor(Math.random() * 720);
 
-    on(document.getElementById("closeFinalModal"), "click", function () {
-      var finalModal = document.getElementById("finalModal");
-
-      if (finalModal) {
-        finalModal.classList.remove("show");
-      }
-    });
-
-    on(document.getElementById("finalModal"), "click", function (event) {
-      var finalModal = document.getElementById("finalModal");
-
-      if (event.target === finalModal) {
-        finalModal.classList.remove("show");
-      }
-    });
-
-    /* GACHA */
-
-    on(document.getElementById("gachaButton"), "click", function () {
-      var machine = document.getElementById("gachaMachine");
-      var result = document.getElementById("gachaResult");
-
-      if (machine) {
-        machine.classList.add("shake");
+      if (wheel) {
+        wheel.style.transition = "transform 1.25s cubic-bezier(.18,.88,.24,1)";
+        wheel.style.transform = "rotate(" + wheelRotation + "deg)";
       }
 
       if (result) {
-        result.textContent = "Đang rút lời thương cho Embee...";
+        result.textContent = "Đang quay lời chúc cho Embee...";
       }
+
+      spawnSparkles(18);
 
       setTimeout(function () {
         if (result) {
-          result.textContent = randomItem(gachaNotes);
+          result.textContent = randomItem(wheelNotes);
+          pulseElement(result);
         }
 
-        if (machine) {
-          machine.classList.remove("shake");
-        }
-
+        spawnConfetti(45);
         increaseLove();
-        burstCute(18);
-        spawnSparkles(14);
-      }, 650);
+        wheelSpinning = false;
+      }, 1300);
+    }
+
+    function tryFinalGift() {
+      var count = getQuestCount();
+      var finalText = document.getElementById("finalText");
+
+      if (count < 7) {
+        if (finalText) {
+          finalText.textContent =
+            "Còn thiếu " + (7 - count) + " dấu mộc nữa. Embee chơi thêm để mở quà cuối nha.";
+        }
+
+        spawnFalling(["🔒", "💙", "✨"], 16);
+        scrollToTarget("arcade");
+        return;
+      }
+
+      openModal("finalModal");
+      spawnConfetti(85);
+      spawnFalling(["🎁", "💙", "🩵", "✨"], 34);
+    }
+
+    function openPhoto(actionElement) {
+      var photo = document.getElementById("modalPhoto");
+      var caption = document.getElementById("modalCaption");
+
+      var imgUrl = actionElement.getAttribute("data-img");
+      var text = actionElement.getAttribute("data-caption");
+
+      if (photo && imgUrl) {
+        photo.src = imgUrl;
+      }
+
+      if (caption) {
+        caption.textContent = text || "Một khoảnh khắc rất đáng yêu của Embee.";
+      }
+
+      openModal("photoModal");
+    }
+
+    function openModal(id) {
+      var modal = document.getElementById(id);
+
+      if (modal) {
+        modal.classList.add("show");
+      }
+    }
+
+    function closeModal(id) {
+      var modal = document.getElementById(id);
+
+      if (modal) {
+        modal.classList.remove("show");
+      }
+
+      if (id === "photoModal") {
+        var photo = document.getElementById("modalPhoto");
+
+        if (photo) {
+          photo.src = "";
+        }
+      }
+    }
+
+    function handleAction(actionElement, event) {
+      var action = actionElement.getAttribute("data-action");
+
+      if (!action) return;
+
+      if (siteOpened && event) {
+        createRipple(event.clientX, event.clientY);
+      }
+
+      if (action === "start-world") {
+        openWorld();
+        return;
+      }
+
+      if (action === "toggle-music") {
+        toggleMusic();
+        return;
+      }
+
+      if (action === "scroll-to") {
+        scrollToTarget(actionElement.getAttribute("data-target"));
+        return;
+      }
+
+      if (action === "open-secret-letter") {
+        openModal("secretModal");
+        return;
+      }
+
+      if (action === "quick-note") {
+        quickNote();
+        return;
+      }
+
+      if (action === "confetti") {
+        doConfetti(actionElement);
+        return;
+      }
+
+      if (action === "toy") {
+        handleToy(actionElement);
+        return;
+      }
+
+      if (action === "wish-candle") {
+        doWishCandle(actionElement);
+        return;
+      }
+
+      if (action === "balloon-pop") {
+        doBalloonPop(actionElement);
+        return;
+      }
+
+      if (action === "compliment") {
+        doCompliment(actionElement);
+        return;
+      }
+
+      if (action === "spin-wheel") {
+        spinWheel();
+        return;
+      }
+
+      if (action === "final-gift") {
+        tryFinalGift();
+        return;
+      }
+
+      if (action === "open-photo") {
+        openPhoto(actionElement);
+        return;
+      }
+
+      if (action === "close-modal") {
+        closeModal(actionElement.getAttribute("data-target"));
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      var actionElement = event.target.closest("[data-action]");
+
+      if (actionElement) {
+        event.preventDefault();
+        handleAction(actionElement, event);
+        return;
+      }
+
+      if (event.target.classList && event.target.classList.contains("modal")) {
+        closeModal(event.target.id);
+        return;
+      }
+
+      if (!siteOpened) return;
+
+      createRipple(event.clientX, event.clientY);
+
+      var item = document.createElement("div");
+      item.className = "fx fx-up";
+      item.textContent = randomItem(["💙", "🩵", "☁️", "✨"]);
+
+      item.style.left = event.clientX + "px";
+      item.style.bottom = window.innerHeight - event.clientY + "px";
+      item.style.fontSize = "20px";
+      item.style.animationDuration = "3.5s";
+
+      appendFx(item, 4200);
     });
 
-    /* GALLERY / LIGHTBOX */
-
-    $all(".gallery-img").forEach(function (img) {
+    $all(".safe-img").forEach(function (img) {
       img.addEventListener("error", function () {
         img.onerror = null;
         img.src = makeFallbackImage("Embee 💙");
       });
     });
 
-    $all(".gallery-card").forEach(function (card) {
-      card.addEventListener("click", function () {
-        var image = card.querySelector("img");
-        var lightbox = document.getElementById("lightbox");
-        var lightboxImage = document.getElementById("lightboxImage");
-        var lightboxCaption = document.getElementById("lightboxCaption");
+    function appendFx(element, removeAfter) {
+      if (!fxLayer) return;
 
-        if (!image || !lightbox || !lightboxImage) return;
-
-        lightboxImage.src = image.src;
-
-        if (lightboxCaption) {
-          lightboxCaption.textContent =
-            card.getAttribute("data-caption") || "Một khoảnh khắc rất đáng yêu của Embee.";
-        }
-
-        lightbox.classList.add("show");
-      });
-    });
-
-    on(document.getElementById("lightbox"), "click", function (event) {
-      var lightbox = document.getElementById("lightbox");
-      var lightboxImage = document.getElementById("lightboxImage");
-
-      if (event.target === lightbox) {
-        lightbox.classList.remove("show");
-
-        if (lightboxImage) {
-          lightboxImage.src = "";
-        }
-      }
-    });
-
-    /* EFFECTS */
-
-    function appendEffect(element, removeAfter) {
-      if (!effectLayer) return;
-
-      effectLayer.appendChild(element);
+      fxLayer.appendChild(element);
 
       setTimeout(function () {
         if (element && element.parentNode) {
@@ -691,9 +728,8 @@
           "🐾",
           "🐶",
           "🐱",
-          "🧁",
-          "🍜",
           "🎂",
+          "🍜",
           "🎈",
           "✨"
         ]);
@@ -702,7 +738,7 @@
         item.style.fontSize = 16 + Math.random() * 22 + "px";
         item.style.animationDuration = 4.4 + Math.random() * 2.8 + "s";
 
-        appendEffect(item, 7600);
+        appendFx(item, 7600);
       }, index * 45);
     }
 
@@ -725,7 +761,7 @@
         item.style.fontSize = 14 + Math.random() * 18 + "px";
         item.style.animationDuration = 2.4 + Math.random() * 2.2 + "s";
 
-        appendEffect(item, 5600);
+        appendFx(item, 5600);
       }, index * 42);
     }
 
@@ -745,7 +781,7 @@
         item.style.left = Math.random() * 100 + "vw";
         item.style.animationDuration = 2.5 + Math.random() * 2.1 + "s";
 
-        appendEffect(item, 5600);
+        appendFx(item, 5600);
       }, index * 48);
     }
 
@@ -768,7 +804,7 @@
         item.style.fontSize = 18 + Math.random() * 18 + "px";
         item.style.animationDuration = 1.8 + Math.random() * 1.1 + "s";
 
-        appendEffect(item, 3400);
+        appendFx(item, 3400);
       }, index * 90);
     }
 
@@ -794,7 +830,7 @@
         item.style.fontSize = "1.7rem";
         item.style.animationDuration = "1.8s";
 
-        appendEffect(item, 2300);
+        appendFx(item, 2300);
       }, index * 120);
     }
 
@@ -809,15 +845,19 @@
     function createConfettiDelayed(index) {
       setTimeout(function () {
         var item = document.createElement("div");
-        var colors = ["confetti-blue", "confetti-matcha", "confetti-pink", "confetti-yellow"];
+        var colors = [
+          "confetti-blue",
+          "confetti-matcha",
+          "confetti-pink",
+          "confetti-yellow"
+        ];
 
         item.className = "fx fx-down confetti-piece " + randomItem(colors);
-
         item.style.left = Math.random() * 100 + "vw";
         item.style.animationDuration = 2.3 + Math.random() * 2.2 + "s";
         item.style.transform = "rotate(" + Math.floor(Math.random() * 180) + "deg)";
 
-        appendEffect(item, 5600);
+        appendFx(item, 5600);
       }, index * 18);
     }
 
@@ -825,19 +865,23 @@
       var total = amount || 12;
 
       for (var i = 0; i < total; i++) {
-        setTimeout(function () {
-          var item = document.createElement("div");
-
-          item.className = "fx fx-sparkle";
-          item.textContent = randomItem(["✨", "💙", "🩵", "☁️"]);
-
-          item.style.left = 15 + Math.random() * 70 + "vw";
-          item.style.top = 20 + Math.random() * 55 + "vh";
-          item.style.fontSize = 18 + Math.random() * 18 + "px";
-
-          appendEffect(item, 1400);
-        }, i * 45);
+        createSparkleDelayed(i);
       }
+    }
+
+    function createSparkleDelayed(index) {
+      setTimeout(function () {
+        var item = document.createElement("div");
+
+        item.className = "fx fx-sparkle";
+        item.textContent = randomItem(["✨", "💙", "🩵", "☁️"]);
+
+        item.style.left = 15 + Math.random() * 70 + "vw";
+        item.style.top = 20 + Math.random() * 55 + "vh";
+        item.style.fontSize = 18 + Math.random() * 18 + "px";
+
+        appendFx(item, 1400);
+      }, index * 45);
     }
 
     function spawnPopAtElement(element, items) {
@@ -857,7 +901,7 @@
         item.style.top = centerY + (Math.random() * 70 - 35) + "px";
         item.style.fontSize = 16 + Math.random() * 16 + "px";
 
-        appendEffect(item, 1100);
+        appendFx(item, 1100);
       }
     }
 
@@ -868,38 +912,14 @@
       ring.style.left = x + "px";
       ring.style.top = y + "px";
 
-      appendEffect(ring, 800);
+      appendFx(ring, 800);
     }
-
-    document.addEventListener("click", function (event) {
-      if (!siteOpened) return;
-
-      createRipple(event.clientX, event.clientY);
-
-      var interactive = event.target.closest(
-        "button, .gallery-card, .toy-card, .lightbox, .final-modal, a"
-      );
-
-      if (interactive) return;
-
-      var item = document.createElement("div");
-
-      item.className = "fx fx-up";
-      item.textContent = randomItem(["💙", "🩵", "☁️", "✨"]);
-
-      item.style.left = event.clientX + "px";
-      item.style.bottom = window.innerHeight - event.clientY + "px";
-      item.style.fontSize = "20px";
-      item.style.animationDuration = "3.5s";
-
-      appendEffect(item, 4200);
-    });
 
     setInterval(function () {
       if (siteOpened) {
         burstCute(1);
       }
-    }, 1600);
+    }, 1700);
 
     function makeFallbackImage(label) {
       var svg =
