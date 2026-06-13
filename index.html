@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Floating Love Letter for Embee 💙</title>
+  <title>Love Heart for Embee 💙</title>
 
-  <link rel="stylesheet" href="./style.css?v=11" />
-  <script src="./script.js?v=11" defer></script>
+  <link rel="stylesheet" href="./style.css?v=12" />
+  <script src="./script.js?v=12" defer></script>
 </head>
 
 <body>
@@ -18,61 +18,82 @@
     preload="auto"
   ></audio>
 
-  <!-- Decorative layers: không bao giờ chặn bấm -->
-  <div class="bg-layer"></div>
-  <div class="heart-glow"></div>
-  <div id="floatingTextLayer" class="floating-text-layer"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-blur"></div>
+
+  <div id="wishLayer" class="wish-layer"></div>
   <div id="fxLayer" class="fx-layer"></div>
 
   <!-- INTRO -->
-  <main id="intro" class="intro-screen">
+  <main id="intro" class="intro">
+    <div class="terminal-top">
+      <div class="terminal-brand">
+        <span class="red-dot"></span>
+        <strong>heart.exe</strong>
+      </div>
+
+      <div class="terminal-url">
+        <span>~/embee/love-message</span>
+      </div>
+    </div>
+
     <section class="intro-card">
-      <p class="system-line">
-        [system] loading love_message_for_Embee...
+      <p class="code-line">
+        <span>[system]</span> encrypted birthday message found
       </p>
 
       <h1>Love you.</h1>
 
-      <p class="intro-text">
-        Một bức ảnh, một bài nhạc, và rất nhiều lời chúc bay lên dành riêng cho Embee.
+      <p class="intro-desc">
+        Một bức ảnh, một trái tim bằng chữ “I love you”,
+        và rất nhiều lời chúc bay lên dành riêng cho Embee.
       </p>
 
-      <button id="startButton" class="main-button" type="button">
-        Mở lời chúc cho Embee 💙
+      <button id="decryptButton" class="decrypt-button" type="button">
+        <span>🔒</span>
+        Decrypt Message
       </button>
 
-      <p class="tiny-hint">Bấm một lần là đủ, web sẽ tự chạy thật nhẹ.</p>
+      <p class="tap-note">
+        Bấm một lần thôi, phần còn lại cứ để tình yêu tự chạy.
+      </p>
     </section>
   </main>
 
-  <!-- MAIN LOVE SCENE -->
-  <section id="loveScene" class="love-scene hidden">
-    <header class="top-bar">
-      <div class="brand">
+  <!-- HEART SCENE -->
+  <section id="heartScene" class="heart-scene hidden">
+    <canvas id="heartCanvas"></canvas>
+
+    <header class="scene-topbar">
+      <div class="scene-brand">
         <span>💙</span>
-        <strong>Embee Letter</strong>
+        <strong>Embee Heart</strong>
       </div>
 
-      <div class="top-actions">
-        <button id="musicButton" class="small-button" type="button">
+      <div class="scene-actions">
+        <button id="musicButton" class="small-button" type="button" aria-label="Bật hoặc tắt nhạc">
           <span id="musicIcon">▶</span>
         </button>
 
         <button id="letterButton" class="small-button text-button" type="button">
-          Thư 💌
+          Thư
+        </button>
+
+        <button id="replayButton" class="small-button text-button" type="button">
+          Replay
         </button>
       </div>
     </header>
 
-    <section class="center-stage">
-      <div class="love-title">
+    <div class="center-content">
+      <div class="heart-title">
         <p>Happy Birthday</p>
         <h2>Embee</h2>
-        <span>Every little “I love you” on this screen is for you.</span>
+        <span>Every “I love you” here is for you.</span>
       </div>
 
-      <div id="photoWrap" class="photo-wrap">
-        <div class="photo-aura"></div>
+      <div id="photoCard" class="photo-card">
+        <div class="photo-glow"></div>
 
         <img
           id="mainPhoto"
@@ -82,14 +103,14 @@
 
         <div class="photo-caption">
           <span>my blue sky</span>
-          Embee là lý do khiến màn hình này dịu lại.
+          Embee là người khiến màn hình này dịu lại.
         </div>
       </div>
 
-      <div class="main-message">
+      <div class="main-letter">
         <p>
-          Chúc Embee tuổi mới luôn xinh đẹp, luôn bình yên,
-          luôn được yêu thương bằng sự dịu dàng và thật lòng.
+          Chúc Embee tuổi mới luôn xinh đẹp, bình yên,
+          được yêu thương bằng sự dịu dàng và thật lòng.
         </p>
 
         <p>
@@ -98,7 +119,7 @@
           và thật nhiều cảm giác được thương.
         </p>
       </div>
-    </section>
+    </div>
   </section>
 
   <!-- LETTER MODAL -->
@@ -111,13 +132,15 @@
       <h3>Gửi Embee của anh</h3>
 
       <p>
-        Anh làm lại bản này nhẹ hơn, ít nút hơn, không rối nữa.
-        Chỉ còn một bức ảnh, một bài nhạc, và thật nhiều lời thương bay quanh em.
+        Anh không muốn web này rối nữa, nên anh giữ lại những thứ quan trọng nhất:
+        một bức ảnh của em, một bài nhạc, một trái tim bằng chữ “I love you”,
+        và những lời chúc bay quanh em thật nhẹ.
       </p>
 
       <p>
         Anh thương những điều rất riêng của em: matcha latte, chocolate,
-        cún mèo, crocs cute, mì ngon, bánh sinh nhật và cả những lúc em nhõng nhẽo.
+        cún mèo, crocs cute, mì ngon, bánh sinh nhật,
+        và cả những lúc em nhõng nhẽo.
       </p>
 
       <p>
@@ -130,11 +153,11 @@
     </div>
   </div>
 
-  <!-- Fallback cực nhẹ: nếu script lỗi vẫn mở được -->
+  <!-- Fallback nhẹ nếu JS lỗi -->
   <script>
-    window.openLoveFallback = function () {
+    window.openHeartFallback = function () {
       var intro = document.getElementById("intro");
-      var scene = document.getElementById("loveScene");
+      var scene = document.getElementById("heartScene");
       var music = document.getElementById("bgMusic");
 
       if (intro) intro.style.display = "none";
@@ -147,10 +170,10 @@
     };
 
     document.addEventListener("DOMContentLoaded", function () {
-      var startButton = document.getElementById("startButton");
+      var button = document.getElementById("decryptButton");
 
-      if (startButton) {
-        startButton.addEventListener("click", window.openLoveFallback);
+      if (button) {
+        button.addEventListener("click", window.openHeartFallback);
       }
     });
   </script>
